@@ -9,7 +9,7 @@ example :
     $locator = $container->get('meup_geolocation.locator');
 
     $address = new Address();
-    $address->setAddress('360 rue du thor, 34000 Montpellier');
+    $address->setFullAddress('360 rue du thor, 34000 Montpellier');
 
     $coordinates = $locator->locate($address);
 
@@ -35,5 +35,36 @@ reverse :
 
     $address = $locator->locate($coordinates);
 
-    print $address->getAddress();
+    print $address->getFullAddress();
     // output : 640 Rue du Mas de Verchant, 34000 Montpellier
+
+
+
+create your own locator provider :
+
+    # services.yml
+    
+    meup_geolocation.example_locator:
+        class: Acme\GeoCoding\Locator
+        arguments: # ...
+        tags:
+            - { name: meup_geolocation.locator }
+
+
+    <?php 
+    # vendor/Acme/Locator.php
+
+    namespace Acme\GeoCoding;
+
+    use Meup\Bundle\GeoLocationBundle\Domain\Handler\Locator as BaseLocator
+    use Meup\Bundle\GeoLocationBundle\Domain\Model\AddressInterface;
+    use Meup\Bundle\GeoLocationBundle\Domain\Model\CoordinatesInterface;
+
+    class Locator extends BaseLocator
+    {
+        public function getCoordinates(AddressInterface $address)
+        {}
+
+        public function getAddress(CoordinatesInterface $coordinates)
+        {}
+    }

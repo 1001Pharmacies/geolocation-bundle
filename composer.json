@@ -1,0 +1,29 @@
+{
+    "name":         "1001pharmacies/geolocation-bundle",
+    "type":         "symfony-bundle",
+    "description":  "",
+    "authors": [
+        {
+            "name": "methylbro",
+            "email": "thomas@1001pharmacies.com"
+        }
+    ],
+    "require": {
+        "jms/serializer-bundle": "~0.13",
+        "fabpot/goutte":         "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit":                      "4.*",
+        "squizlabs/php_codesniffer":            "1.*",
+        "sebastian/phpcpd":                     "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Meup\\Bundle\\GeoLocationBundle": ""
+        }
+    },
+    "target-dir": "Meup/Bundle/GeoLocationBundle",
+    "config": {
+        "bin-dir": "bin"
+    }
+}

@@ -1,5 +1,14 @@
 <?php
 
+/**
+* This file is part of the Meup GeoLocation Bundle.
+*
+* (c) 1001pharmacies <http://github.com/1001pharmacies/geolocation-bundle>
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
 namespace Meup\Bundle\GeoLocationBundle\Domain\Model;
 
 /**
@@ -17,7 +26,7 @@ class Address extends Location implements AddressInterface
      *
      * @return self
      */
-    public function setAddress($address)
+    public function setFullAddress($address)
     {
         $this->address = $address;
 
@@ -27,7 +36,7 @@ class Address extends Location implements AddressInterface
     /**
      * {@inheritDoc}
      */
-    public function getAddress()
+    public function getFullAddress()
     {
         return $this->address;
     }
