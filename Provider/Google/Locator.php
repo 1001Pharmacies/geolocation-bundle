@@ -17,8 +17,6 @@ use Meup\Bundle\GeoLocationBundle\Domain\Hydrator\Hydrator;
 use Meup\Bundle\GeoLocationBundle\Domain\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Domain\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Domain\Model\CoordinatesInterface;
-use Meup\Bundle\GeoLocationBundle\Domain\Model\Address;
-use Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates;
 
 /**
  *
@@ -72,8 +70,6 @@ class Locator extends BaseLocator
                 )
                 ->json()
         );
-
-        ;
     }
 
     /**

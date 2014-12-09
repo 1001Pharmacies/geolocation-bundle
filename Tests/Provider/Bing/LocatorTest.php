@@ -9,14 +9,14 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\GeoLocationBundle\Tests\Provider\Google;
+namespace Meup\Bundle\GeoLocationBundle\Tests\Provider\Bing;
 
 use Meup\Bundle\GeoLocationBundle\Domain\Model\Address;
 use Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates;
 use Meup\Bundle\GeoLocationBundle\Domain\Factory\AddressFactory;
 use Meup\Bundle\GeoLocationBundle\Domain\Factory\CoordinatesFactory;
-use Meup\Bundle\GeoLocationBundle\Provider\Google\Locator as GoogleLocator;
-use Meup\Bundle\GeoLocationBundle\Provider\Google\Hydrator as GoogleHydrator;
+use Meup\Bundle\GeoLocationBundle\Provider\Bing\Locator as BingLocator;
+use Meup\Bundle\GeoLocationBundle\Provider\Bing\Hydrator as BingHydrator;
 use Meup\Bundle\GeoLocationBundle\Tests\Provider\LocatorTestCase;
 
 /**
@@ -34,46 +34,24 @@ class LocatorTest extends LocatorTestCase
             '250 rue du Thor, 34000 Montpellier'
         );
 
-        $locator = new GoogleLocator(
-            new GoogleHydrator(
+        $locator = new BingLocator(
+            new BingHydrator(
                 new AddressFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Address'),
                 new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates')
             ),
-            $this->getClient('get-coordinates-result.json', __DIR__)
+            $this->getClient('get-coordinates-result.json', __DIR__),
+            'api-key'
         );
 
         $coordinates = $locator->locate($address);
 
         $this->assertEquals(
-            array(43.6184254, 3.9160863),
+            array(43.617723, 3.915721),
             array(
                 $coordinates->getLatitude(),
                 $coordinates->getLongitude()
             )
         );
-    }
-
-    /**
-     *
-     */
-    public function testGetWithNoResults()
-    {
-        $address = new Address();
-        $address->setFullAddress(
-            '250 rue du Thor, 34000 Montpellier'
-        );
-
-        $locator = new GoogleLocator(
-            new GoogleHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates')
-            ),
-            $this->getClient('zero-results.json', __DIR__)
-        );
-
-        $this->setExpectedException('Exception');
-
-        $coordinates = $locator->locate($address);
     }
 
     /**
@@ -87,18 +65,19 @@ class LocatorTest extends LocatorTestCase
             ->setLongitude(3.9162419)
         ;
 
-        $locator = new GoogleLocator(
-            new GoogleHydrator(
+        $locator = new BingLocator(
+            new BingHydrator(
                 new AddressFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Address'),
                 new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates')
             ),
-            $this->getClient('get-address-result.json', __DIR__)
+            $this->getClient('get-address-result.json', __DIR__),
+            'api-key'
         );
 
         $address = $locator->locate($coordinates);
 
         $this->assertEquals(
-            '640 Rue du Mas de Verchant, 34000 Montpellier, France',
+            'Sigean, Aude, France',
             $address->getFullAddress()
         );
     }
