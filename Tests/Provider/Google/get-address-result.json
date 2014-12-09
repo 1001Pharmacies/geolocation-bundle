@@ -1,0 +1,371 @@
+{
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "640",
+               "short_name" : "640",
+               "types" : [ "street_number" ]
+            },
+            {
+               "long_name" : "Rue du Mas de Verchant",
+               "short_name" : "Rue du Mas de Verchant",
+               "types" : [ "route" ]
+            },
+            {
+               "long_name" : "Montpellier",
+               "short_name" : "Montpellier",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Hérault",
+               "short_name" : "34",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Languedoc-Roussillon",
+               "short_name" : "Languedoc-Roussillon",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "France",
+               "short_name" : "FR",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "34000",
+               "short_name" : "34000",
+               "types" : [ "postal_code" ]
+            }
+         ],
+         "formatted_address" : "640 Rue du Mas de Verchant, 34000 Montpellier, France",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 43.6190815,
+                  "lng" : 3.917241
+               },
+               "southwest" : {
+                  "lat" : 43.6190475,
+                  "lng" : 3.9162419
+               }
+            },
+            "location" : {
+               "lat" : 43.6190682,
+               "lng" : 3.9162409
+            },
+            "location_type" : "RANGE_INTERPOLATED",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 43.6204134802915,
+                  "lng" : 3.918090430291501
+               },
+               "southwest" : {
+                  "lat" : 43.6177155197085,
+                  "lng" : 3.915392469708497
+               }
+            }
+         },
+         "types" : [ "street_address" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "Millénaire - Grammont",
+               "short_name" : "Millénaire - Grammont",
+               "types" : [ "neighborhood", "political" ]
+            },
+            {
+               "long_name" : "Montpellier",
+               "short_name" : "Montpellier",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Hérault",
+               "short_name" : "34",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Languedoc-Roussillon",
+               "short_name" : "Languedoc-Roussillon",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "France",
+               "short_name" : "FR",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Millénaire - Grammont, Montpellier, France",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 43.62896,
+                  "lng" : 3.9395459
+               },
+               "southwest" : {
+                  "lat" : 43.603553,
+                  "lng" : 3.9007039
+               }
+            },
+            "location" : {
+               "lat" : 43.6159297,
+               "lng" : 3.9241021
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 43.62896,
+                  "lng" : 3.9395459
+               },
+               "southwest" : {
+                  "lat" : 43.603553,
+                  "lng" : 3.9007039
+               }
+            }
+         },
+         "types" : [ "neighborhood", "political" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "Castelnau-le-Lez",
+               "short_name" : "Castelnau-le-Lez",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Hérault",
+               "short_name" : "34",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Languedoc-Roussillon",
+               "short_name" : "Languedoc-Roussillon",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "France",
+               "short_name" : "FR",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Castelnau-le-Lez, France",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 43.65599599999999,
+                  "lng" : 3.9367631
+               },
+               "southwest" : {
+                  "lat" : 43.6184099,
+                  "lng" : 3.885788999999999
+               }
+            },
+            "location" : {
+               "lat" : 43.6329827,
+               "lng" : 3.8975051
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 43.65599599999999,
+                  "lng" : 3.9367631
+               },
+               "southwest" : {
+                  "lat" : 43.6184099,
+                  "lng" : 3.885788999999999
+               }
+            }
+         },
+         "types" : [ "locality", "political" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "34000",
+               "short_name" : "34000",
+               "types" : [ "postal_code" ]
+            },
+            {
+               "long_name" : "Montpellier",
+               "short_name" : "Montpellier",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Hérault",
+               "short_name" : "34",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Languedoc-Roussillon",
+               "short_name" : "Languedoc-Roussillon",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "France",
+               "short_name" : "FR",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "34000 Montpellier, France",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 43.6290512,
+                  "lng" : 3.941479699999999
+               },
+               "southwest" : {
+                  "lat" : 43.5778294,
+                  "lng" : 3.8462293
+               }
+            },
+            "location" : {
+               "lat" : 43.6047275,
+               "lng" : 3.9011747
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 43.6290512,
+                  "lng" : 3.941479699999999
+               },
+               "southwest" : {
+                  "lat" : 43.5778294,
+                  "lng" : 3.8462293
+               }
+            }
+         },
+         "types" : [ "postal_code" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "Hérault",
+               "short_name" : "34",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Languedoc-Roussillon",
+               "short_name" : "Languedoc-Roussillon",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "France",
+               "short_name" : "FR",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Hérault, France",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 43.9727599,
+                  "lng" : 4.1945401
+               },
+               "southwest" : {
+                  "lat" : 43.2102099,
+                  "lng" : 2.539549
+               }
+            },
+            "location" : {
+               "lat" : 43.5912356,
+               "lng" : 3.2583626
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 43.9727599,
+                  "lng" : 4.1945401
+               },
+               "southwest" : {
+                  "lat" : 43.2102099,
+                  "lng" : 2.539549
+               }
+            }
+         },
+         "types" : [ "administrative_area_level_2", "political" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "Languedoc-Roussillon",
+               "short_name" : "Languedoc-Roussillon",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "France",
+               "short_name" : "FR",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Languedoc-Roussillon, France",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 44.975761,
+                  "lng" : 4.845564
+               },
+               "southwest" : {
+                  "lat" : 42.333014,
+                  "lng" : 1.688426
+               }
+            },
+            "location" : {
+               "lat" : 43.5912356,
+               "lng" : 3.2583626
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 44.975761,
+                  "lng" : 4.845564
+               },
+               "southwest" : {
+                  "lat" : 42.333014,
+                  "lng" : 1.688426
+               }
+            }
+         },
+         "types" : [ "administrative_area_level_1", "political" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "France",
+               "short_name" : "FR",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "France",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 51.089166,
+                  "lng" : 9.560067799999999
+               },
+               "southwest" : {
+                  "lat" : 41.3423276,
+                  "lng" : -5.141227900000001
+               }
+            },
+            "location" : {
+               "lat" : 46.227638,
+               "lng" : 2.213749
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 51.089166,
+                  "lng" : 8.233549099999999
+               },
+               "southwest" : {
+                  "lat" : 42.333014,
+                  "lng" : -4.795341899999999
+               }
+            }
+         },
+         "types" : [ "country", "political" ]
+      }
+   ],
+   "status" : "OK"
+}

@@ -1,0 +1,94 @@
+{
+    "results": [
+        {
+            "address_components": [
+                {
+                    "long_name": "250",
+                    "short_name": "250",
+                    "types": [
+                        "street_number"
+                    ]
+                },
+                {
+                    "long_name": "Rue de Thor",
+                    "short_name": "Rue de Thor",
+                    "types": [
+                        "route"
+                    ]
+                },
+                {
+                    "long_name": "Montpellier",
+                    "short_name": "Montpellier",
+                    "types": [
+                        "locality",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "H\u00e9rault",
+                    "short_name": "34",
+                    "types": [
+                        "administrative_area_level_2",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Languedoc-Roussillon",
+                    "short_name": "Languedoc-Roussillon",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "France",
+                    "short_name": "FR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "34000",
+                    "short_name": "34000",
+                    "types": [
+                        "postal_code"
+                    ]
+                }
+            ],
+            "formatted_address": "250 Rue de Thor, 34000 Montpellier, France",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 43.6190815,
+                        "lng": 3.9162419
+                    },
+                    "southwest": {
+                        "lat": 43.6181452,
+                        "lng": 3.9159672
+                    }
+                },
+                "location": {
+                    "lat": 43.6184254,
+                    "lng": 3.9160863
+                },
+                "location_type": "RANGE_INTERPOLATED",
+                "viewport": {
+                    "northeast": {
+                        "lat": 43.619962330292,
+                        "lng": 3.9174535302915
+                    },
+                    "southwest": {
+                        "lat": 43.617264369709,
+                        "lng": 3.9147555697085
+                    }
+                }
+            },
+            "partial_match": true,
+            "types": [
+                "street_address"
+            ]
+        }
+    ],
+    "status": "OK"
+}

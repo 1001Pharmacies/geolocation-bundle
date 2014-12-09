@@ -13,8 +13,11 @@ namespace Meup\Bundle\GeoLocationBundle\Provider\Google;
 
 use GuzzleHttp\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Domain\Handler\Locator as BaseLocator;
+use Meup\Bundle\GeoLocationBundle\Domain\Hydrator\Hydrator;
+use Meup\Bundle\GeoLocationBundle\Domain\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Domain\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Domain\Model\CoordinatesInterface;
+use Meup\Bundle\GeoLocationBundle\Domain\Model\Address;
 use Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates;
 
 /**
@@ -25,11 +28,29 @@ class Locator extends BaseLocator
     /**
      * 
      */
-    public function __construct(HttpClient $http_client, $api_key = null)
+    public function __construct(HydratorInterface $hydrator, HttpClient $http_client, $api_key = null)
     {
+        $this->hydrator = $hydrator;
         $this->api_key = $api_key;
         $this->api_endpoint = 'https://maps.googleapis.com/maps/api/geocode/json';
         $this->http_client = $http_client;
+    }
+
+    /**
+     *
+     */
+    protected function populate($type, $response)
+    {
+        if ($response['status']!='OK') {
+            throw new \Exception('No results found.');
+        }
+        return $this
+            ->hydrator
+            ->hydrate(
+                $response['results'],
+                $type
+            )
+        ;
     }
 
     /**
@@ -37,35 +58,22 @@ class Locator extends BaseLocator
      */
     public function getCoordinates(AddressInterface $address)
     {
-        $http_response = $this
-            ->http_client
-            ->get(
-                sprintf(
-                    '%s?address=%s&API_KEY=%s',
-                    $this->api_endpoint,
-                    $address->getFullAddress(),
-                    $this->api_key
+        return $this->populate(
+            Hydrator::TYPE_COORDINATES,
+            $this
+                ->http_client
+                ->get(
+                    sprintf(
+                        '%s?address=%s&key=%s',
+                        $this->api_endpoint,
+                        $address->getFullAddress(),
+                        $this->api_key
+                    )
                 )
-            )
+                ->json()
+        );
+
         ;
-
-        $api_response = $http_response->json();
-
-        if ($api_response['status']=='OK') {
-            $results = $api_response['results'];
-            
-            $latitude  = $results[0]['geometry']['location']['lat'];
-            $longitude = $results[0]['geometry']['location']['lng'];
-
-            $coordinates = (new Coordinates())
-                ->setLatitude($latitude)
-                ->setLongitude($longitude)
-            ;
-
-            return $coordinates;
-        }
-
-        // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=API_KEY
     }
 
     /**
@@ -73,6 +81,20 @@ class Locator extends BaseLocator
      */
     public function getAddress(CoordinatesInterface $coordinates)
     {
-        // https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=API_KEY
+        return $this->populate(
+            Hydrator::TYPE_ADDRESS,
+            $this
+                ->http_client
+                ->get(
+                    sprintf(
+                        '%s?latlng=%d,%d&key=%s',
+                        $this->api_endpoint,
+                        $coordinates->getLatitude(),
+                        $coordinates->getLongitude(),
+                        $this->api_key
+                    )
+                )
+                ->json()
+        );
     }
 }
