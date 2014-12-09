@@ -38,7 +38,24 @@ reverse :
     print $address->getFullAddress();
     // output : 640 Rue du Mas de Verchant, 34000 Montpellier
 
+distance calculation :
 
+    $paris = (new Coordinates())
+        ->setLatitude(48.856667)
+        ->setLongitude(2.350987)
+    ;
+
+    $lyon = (new Coordinates())
+        ->setLatitude(45.767299)
+        ->setLongitude(4.834329)
+    ;
+
+    $distance_paris_lyon = $this
+        ->get('meup_geolocation.distance_calculator')
+        ->getDistance($paris, $lyon)
+    ;
+
+    printf('%d km', $distance_paris_lyon); # 391.613 km
 
 create your own locator provider :
 

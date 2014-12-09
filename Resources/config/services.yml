@@ -2,13 +2,21 @@ parameters:
 
 services:
 
+    meup_geolocation.address_factory:
+        class: Meup\Bundle\GeoLocationBundle\Factory\AddressFactory
+        arguments:
+            - Meup\Bundle\GeoLocationBundle\Model\Address
+
+    meup_geolocation.coordinates_factory:
+        class: Meup\Bundle\GeoLocationBundle\Factory\CoordinatesFactory
+        arguments:
+            - Meup\Bundle\GeoLocationBundle\Model\Coordinates
+
     meup_geolocation.http_client:
         class: GuzzleHttp\Client
-#
-#
-#    meup_geolocation.locator:
-#        class:
-#        arguments: []
+
+    meup_geolocation.locator:
+        class: Meup\Bundle\GeoLocationBundle\Tests\Domain\Handler\LocatorManager
 
     meup_geolocation.google_hydrator:
         class: Meup\Bundle\GeoLocationBundle\Provider\Google\Hydrator
@@ -22,5 +30,20 @@ services:
             - @meup_geolocation.google_hydrator
             - @meup_geolocation.http_client
             - %google_api_key%
+        tags:
+            - { name: meup_geolocation.locator }
+
+    meup_geolocation.bing_hydrator:
+        class: Meup\Bundle\GeoLocationBundle\Provider\Bing\Hydrator
+        arguments:
+            - @meup_geolocation.address_factory
+            - @meup_geolocation.coordinates_factory
+
+    meup_geolocation.bing_locator:
+        class: Meup\Bundle\GeoLocationBundle\Provider\Bing\Locator
+        arguments: 
+            - @meup_geolocation.bing_hydrator
+            - @meup_geolocation.http_client
+            - %bing_api_key%
         tags:
             - { name: meup_geolocation.locator }

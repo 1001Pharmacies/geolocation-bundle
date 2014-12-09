@@ -18,19 +18,12 @@ use Meup\Bundle\GeoLocationBundle\Domain\Model\CoordinatesInterface;
 /**
  *
  */
-interface LocatorInterface extends LocatorServiceInterface
+interface LocatorServiceInterface
 {
     /**
-     * @param AddressInterface $address
+     * @param LocationInterface $location
      *
-     * @return CoordinatesInterface
+     * @return LocationInterface 
      */
-    public function getCoordinates(AddressInterface $address);
-
-    /**
-     * @param CoordinatesInterface $coordinates
-     * 
-     * @return AddressInterface
-     */
-    public function getAddress(CoordinatesInterface $coordinates);
+    public function locate(LocationInterface $location);
 }
