@@ -1,6 +1,17 @@
 GeoLocation Bundle
 ==================
 
+Provides an abstraction layer for geocoding services. This bundle can be also used to split geocoding's calculation between a set of external geocoding service.
+
+### Supported providers
+
+The following services are included to this bundle :
+
+*  [Google](doc/provider/google.md)
+*  [Bing](doc/provider/bing.md)
+
+The the complete documentation to [add you own provider](doc/custom-provider.md).
+
 Example
 -------
 
@@ -9,14 +20,16 @@ Example
 #### Coordinates by Address
 
 ```php
-    use Meup\Bundle\GeoLocationBundle\Model\Address;
+    $address = $container
+        ->get('meup_geolocation.address_factory')
+        ->create()
+        ->setFullAddress('360 rue du thor, 34000 Montpellier')
+    ;
 
-    $locator = $container->get('meup_geolocation.locator');
-
-    $address = new Address();
-    $address->setFullAddress('360 rue du thor, 34000 Montpellier');
-
-    $coordinates = $locator->locate($address);
+    $coordinates = $container
+        ->get('meup_geolocation.locator')
+        ->locate($address)
+    ;
 
     printf(
         "%s,%s\n",
@@ -29,17 +42,17 @@ Example
 #### Address by Coordinates
 
 ```php
-    use Meup\Bundle\GeoLocationBundle\Model\Coordinates;
-
-    $locator = $container->get('meup_geolocation.locator');
-
-    $coordinates = new Coordinates();
-    $coordinates
+    $coordinates = $container
+        ->get('meup_geolocation.coordinates_factory')
+        ->create()
         ->setLatitude(43.6190815)
         ->setLongitude(3.9162419)
     ;
 
-    $address = $locator->locate($coordinates);
+    $address = $container
+        ->get('meup_geolocation.locator')
+        ->locate($coordinates)
+    ;
 
     print $address->getFullAddress();
     // output : 640 Rue du Mas de Verchant, 34000 Montpellier
@@ -47,18 +60,25 @@ Example
 
 ### Distance calculation
 
+When you found two location's coordinates you can also calculate their distance with the distance calculator.
+
 ```php
-    $paris = (new Coordinates())
+    $factory = $container
+        ->get('meup_geolocation.coordinates_factory')
+    ;
+
+    $paris = $factory
+        ->create()
         ->setLatitude(48.856667)
         ->setLongitude(2.350987)
     ;
-
-    $lyon = (new Coordinates())
+    $lyon = $factory
+        ->create()
         ->setLatitude(45.767299)
         ->setLongitude(4.834329)
     ;
 
-    $distance_paris_lyon = $this
+    $distance_paris_lyon = $container
         ->get('meup_geolocation.distance_calculator')
         ->getDistance($paris, $lyon)
     ;
@@ -91,3 +111,9 @@ Update `app/AppKernel.php` :
             new Meup\Bundle\GeoLocationBundle\MeupGeoLocationBundle(),
         );
 ```
+
+### Customization
+
+*  [Model](doc/custom-model.md)
+*  [Hydratation](doc/custom-hydrator.md)
+*  [Provider](doc/custom-provider.md)
