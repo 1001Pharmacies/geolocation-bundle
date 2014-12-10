@@ -13,7 +13,7 @@ namespace Meup\Bundle\GeoLocationBundle\Provider\Google;
 
 use GuzzleHttp\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
-use Meup\Bundle\GeoLocationBundle\Hydrator\Hydrator;
+use Meup\Bundle\GeoLocationBundle\Hydrator\Hydrator as BaseHydrator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
@@ -57,7 +57,7 @@ class Locator extends BaseLocator
     public function getCoordinates(AddressInterface $address)
     {
         return $this->populate(
-            Hydrator::TYPE_COORDINATES,
+            BaseHydrator::TYPE_COORDINATES,
             $this
                 ->http_client
                 ->get(
@@ -78,7 +78,7 @@ class Locator extends BaseLocator
     public function getAddress(CoordinatesInterface $coordinates)
     {
         return $this->populate(
-            Hydrator::TYPE_ADDRESS,
+            BaseHydrator::TYPE_ADDRESS,
             $this
                 ->http_client
                 ->get(

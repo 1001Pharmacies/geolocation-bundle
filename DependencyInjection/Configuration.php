@@ -29,9 +29,50 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('meup_geolocation');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+
+                ->arrayNode('address')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('entity_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Model\Address')->end()
+                        ->scalarNode('factory_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Factory\AddressFactory')->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('coordinates')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('entity_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Model\Coordinates')->end()
+                        ->scalarNode('factory_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Factory\CoordinatesFactory')->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('providers')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('google')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('api_key')->defaultValue('%geolocation_google_api_key%')->cannotBeEmpty()->end()
+                                ->scalarNode('api_endpoint')->defaultValue('https://maps.googleapis.com/maps/api/geocode/json')->end()
+                                ->scalarNode('locator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Google\Locator')->end()
+                                ->scalarNode('hydrator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Google\Hydrator')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('bing')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('api_key')->defaultValue('%geolocation_bing_api_key%')->cannotBeEmpty()->end()
+                                ->scalarNode('api_endpoint')->defaultValue('http://dev.virtualearth.net/REST/v1/Locations/')->end()
+                                ->scalarNode('locator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Bing\Locator')->end()
+                                ->scalarNode('hydrator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Bing\Hydrator')->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+
+            ->end();
 
         return $treeBuilder;
     }

@@ -11,6 +11,8 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Handler;
 
+use Meup\Bundle\GeoLocationBundle\Model\LocationInterface;
+
 /**
  *
  */
@@ -34,7 +36,7 @@ class LocatorManager implements LocatorManagerInterface
      */
     public function addLocator(LocatorInterface $locator, Array $attributes = array())
     {
-        $this->locator[] = $locator;
+        $this->locators[] = $locator;
 
         return $this;
     }
@@ -44,7 +46,7 @@ class LocatorManager implements LocatorManagerInterface
      */
     public function locate(LocationInterface $location)
     {
-        $key = rand(0, count($this->locators)-1)
+        $key = rand(0, count($this->locators)-1);
 
         return $this->locators[$key]->locate($location);
     }

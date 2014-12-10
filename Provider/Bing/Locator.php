@@ -13,7 +13,7 @@ namespace Meup\Bundle\GeoLocationBundle\Provider\Bing;
 
 use GuzzleHttp\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
-use Meup\Bundle\GeoLocationBundle\Hydrator\Hydrator;
+use Meup\Bundle\GeoLocationBundle\Hydrator\Hydrator as BaseHydrator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
@@ -56,7 +56,7 @@ class Locator extends BaseLocator
 
         return $this
             ->hydrator
-            ->hydrate($response, Hydrator::TYPE_COORDINATES)
+            ->hydrate($response, BaseHydrator::TYPE_COORDINATES)
         ;
     }
 
@@ -83,7 +83,7 @@ class Locator extends BaseLocator
 
         return $this
             ->hydrator
-            ->hydrate($response, Hydrator::TYPE_ADDRESS)
+            ->hydrate($response, BaseHydrator::TYPE_ADDRESS)
         ;
     }
 }

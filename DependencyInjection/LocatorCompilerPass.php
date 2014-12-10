@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\GeoLocationBundle\DependencyInjection\DependencyInjection;
+namespace Meup\Bundle\GeoLocationBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

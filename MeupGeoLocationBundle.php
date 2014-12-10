@@ -13,7 +13,7 @@ namespace Meup\Bundle\GeoLocationBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Meup\Bundle\GeoLocationBundle\DependencyInjection\DependencyInjection\LocatorCompilerPass;
+use Meup\Bundle\GeoLocationBundle\DependencyInjection\LocatorCompilerPass;
 
 /**
  *
@@ -26,6 +26,7 @@ class MeupGeoLocationBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
+
         $container->addCompilerPass(new LocatorCompilerPass());
     }
 }
