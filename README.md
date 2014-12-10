@@ -117,3 +117,4 @@ Update `app/AppKernel.php` :
 *  [Model](Resources/doc/custom-model.md)
 *  [Hydratation](Resources/doc/custom-hydrator.md)
 *  [Provider](Resources/doc/custom-provider.md)
+*  [Configuration](Resources/doc/configuration.md)
