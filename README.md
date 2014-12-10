@@ -9,7 +9,7 @@ Example
 #### Coordinates by Address
 
 ```php
-    use Meup\Bundle\GeoLocationBundle\Domain\Model\Address;
+    use Meup\Bundle\GeoLocationBundle\Model\Address;
 
     $locator = $container->get('meup_geolocation.locator');
 
@@ -29,7 +29,7 @@ Example
 #### Address by Coordinates
 
 ```php
-    use Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates;
+    use Meup\Bundle\GeoLocationBundle\Model\Coordinates;
 
     $locator = $container->get('meup_geolocation.locator');
 

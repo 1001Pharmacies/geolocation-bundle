@@ -11,10 +11,10 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Tests\Provider\Google;
 
-use Meup\Bundle\GeoLocationBundle\Domain\Model\Address;
-use Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates;
-use Meup\Bundle\GeoLocationBundle\Domain\Factory\AddressFactory;
-use Meup\Bundle\GeoLocationBundle\Domain\Factory\CoordinatesFactory;
+use Meup\Bundle\GeoLocationBundle\Model\Address;
+use Meup\Bundle\GeoLocationBundle\Model\Coordinates;
+use Meup\Bundle\GeoLocationBundle\Factory\AddressFactory;
+use Meup\Bundle\GeoLocationBundle\Factory\CoordinatesFactory;
 use Meup\Bundle\GeoLocationBundle\Provider\Google\Locator as GoogleLocator;
 use Meup\Bundle\GeoLocationBundle\Provider\Google\Hydrator as GoogleHydrator;
 use Meup\Bundle\GeoLocationBundle\Tests\Provider\LocatorTestCase;
@@ -36,8 +36,8 @@ class LocatorTest extends LocatorTestCase
 
         $locator = new GoogleLocator(
             new GoogleHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates')
+                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
+                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
             ),
             $this->getClient('get-coordinates-result.json', __DIR__)
         );
@@ -65,8 +65,8 @@ class LocatorTest extends LocatorTestCase
 
         $locator = new GoogleLocator(
             new GoogleHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates')
+                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
+                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
             ),
             $this->getClient('zero-results.json', __DIR__)
         );
@@ -89,8 +89,8 @@ class LocatorTest extends LocatorTestCase
 
         $locator = new GoogleLocator(
             new GoogleHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates')
+                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
+                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
             ),
             $this->getClient('get-address-result.json', __DIR__)
         );

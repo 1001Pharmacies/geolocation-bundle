@@ -12,11 +12,11 @@
 namespace Meup\Bundle\GeoLocationBundle\Provider\Bing;
 
 use GuzzleHttp\Client as HttpClient;
-use Meup\Bundle\GeoLocationBundle\Domain\Handler\Locator as BaseLocator;
-use Meup\Bundle\GeoLocationBundle\Domain\Hydrator\Hydrator;
-use Meup\Bundle\GeoLocationBundle\Domain\Hydrator\HydratorInterface;
-use Meup\Bundle\GeoLocationBundle\Domain\Model\AddressInterface;
-use Meup\Bundle\GeoLocationBundle\Domain\Model\CoordinatesInterface;
+use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
+use Meup\Bundle\GeoLocationBundle\Hydrator\Hydrator;
+use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
+use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
+use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 
 /**
  * 

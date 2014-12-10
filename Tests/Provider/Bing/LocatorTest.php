@@ -11,10 +11,10 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Tests\Provider\Bing;
 
-use Meup\Bundle\GeoLocationBundle\Domain\Model\Address;
-use Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates;
-use Meup\Bundle\GeoLocationBundle\Domain\Factory\AddressFactory;
-use Meup\Bundle\GeoLocationBundle\Domain\Factory\CoordinatesFactory;
+use Meup\Bundle\GeoLocationBundle\Model\Address;
+use Meup\Bundle\GeoLocationBundle\Model\Coordinates;
+use Meup\Bundle\GeoLocationBundle\Factory\AddressFactory;
+use Meup\Bundle\GeoLocationBundle\Factory\CoordinatesFactory;
 use Meup\Bundle\GeoLocationBundle\Provider\Bing\Locator as BingLocator;
 use Meup\Bundle\GeoLocationBundle\Provider\Bing\Hydrator as BingHydrator;
 use Meup\Bundle\GeoLocationBundle\Tests\Provider\LocatorTestCase;
@@ -36,8 +36,8 @@ class LocatorTest extends LocatorTestCase
 
         $locator = new BingLocator(
             new BingHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates')
+                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
+                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
             ),
             $this->getClient('get-coordinates-result.json', __DIR__),
             'api-key'
@@ -67,8 +67,8 @@ class LocatorTest extends LocatorTestCase
 
         $locator = new BingLocator(
             new BingHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Domain\Model\Coordinates')
+                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
+                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
             ),
             $this->getClient('get-address-result.json', __DIR__),
             'api-key'

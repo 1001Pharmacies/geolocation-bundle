@@ -16,7 +16,7 @@ services:
         class: GuzzleHttp\Client
 
     meup_geolocation.locator:
-        class: Meup\Bundle\GeoLocationBundle\Tests\Domain\Handler\LocatorManager
+        class: Meup\Bundle\GeoLocationBundle\Tests\Handler\LocatorManager
 
     meup_geolocation.google_hydrator:
         class: Meup\Bundle\GeoLocationBundle\Provider\Google\Hydrator

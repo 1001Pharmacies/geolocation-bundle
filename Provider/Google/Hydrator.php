@@ -11,9 +11,9 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Provider\Google;
 
-use Meup\Bundle\GeoLocationBundle\Domain\Hydrator\Hydrator as BaseHydrator;
-use Meup\Bundle\GeoLocationBundle\Domain\Model\AddressInterface;
-use Meup\Bundle\GeoLocationBundle\Domain\Model\CoordinatesInterface;
+use Meup\Bundle\GeoLocationBundle\Hydrator\Hydrator as BaseHydrator;
+use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
+use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 
 /**
  *
