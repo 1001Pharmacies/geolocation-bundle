@@ -7,10 +7,10 @@ Provides an abstraction layer for geocoding services. This bundle can be also us
 
 The following services are included to this bundle :
 
-*  [Google](doc/provider/google.md)
-*  [Bing](doc/provider/bing.md)
+*  [Google](Resources/doc/provider/google.md)
+*  [Bing](Resources/doc/provider/bing.md)
 
-The the complete documentation to [add you own provider](doc/custom-provider.md).
+The the complete documentation to [add you own provider](Resources/doc/custom-provider.md).
 
 Example
 -------
@@ -89,7 +89,7 @@ When you found two location's coordinates you can also calculate their distance 
 Installation
 ------------
 
-Install the package with composer :
+Install the package with [Composer](http://getcomposer.org/) :
 
 ```bash
     composer require 1001pharmacies/geolocation-bundle
@@ -114,6 +114,6 @@ Update `app/AppKernel.php` :
 
 ### Customization
 
-*  [Model](doc/custom-model.md)
-*  [Hydratation](doc/custom-hydrator.md)
-*  [Provider](doc/custom-provider.md)
+*  [Model](Resources/doc/custom-model.md)
+*  [Hydratation](Resources/doc/custom-hydrator.md)
+*  [Provider](Resources/doc/custom-provider.md)
