@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<project name="1001pharmacies/geolocation-bundle" basedir="./" default="help">
+
+    <target name="help">
+        <echo>help     Shows this help</echo>
+        <echo>tests    Run tests</echo>
+        <echo>phpcs    Detects standard violations on the code.</echo>
+        <echo>phpcpd   Detects duplicate code portions.</echo>
+        <echo>phpunit  Executes phpunit tests</echo>
+    </target>
+
+    <target name="test" depends="phpcs,phpcpd,phpunit"></target>
+
+    <target name="phpcs">
+        <phpcodesniffer standard="PSR1">
+            <fileset dir="./">
+                <include name="**/*.php" />
+                <exclude name="vendor/" />
+            </fileset>
+        </phpcodesniffer>
+    </target>
+
+   <target name="phpcpd">
+        <exec executable="./bin/phpcpd">
+            <arg path="./" />
+            <arg value="--exclude=vendor" />
+        </exec>
+    </target>
+
+    <target name="phpunit">
+        <exec logoutput="true" dir="./" command="./bin/phpunit" />
+    </target>
+
+</project>

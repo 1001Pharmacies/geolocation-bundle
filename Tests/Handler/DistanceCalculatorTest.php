@@ -28,7 +28,7 @@ class DistanceCalculatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            391.613, 
+            391.613,
             $distance_calculator->getDistance(
                 (new Coordinates())
                     ->setLatitude(48.856667)
