@@ -92,7 +92,7 @@ class MeupGeoLocationExtension extends Extension
                 array(
                     new Reference($hydrator),
                     new Reference('meup_geolocation.http_client'),
-                    $params['api_key']
+                    $params['api_key'],
                     $params['api_endpoint']
                 )
             );
