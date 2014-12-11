@@ -2,6 +2,8 @@
     "name":         "1001pharmacies/geolocation-bundle",
     "type":         "symfony-bundle",
     "description":  "Provides an abstraction layer for geocoding services.",
+    "keywords": ["Geolocation"],
+    "license": "MIT",
     "authors": [
         {
             "name":  "methylbro",
