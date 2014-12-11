@@ -1,6 +1,8 @@
 GeoLocation Bundle
 ==================
 
+[![Build Status](https://secure.travis-ci.org/1001Pharmacies/geolocation-bundle.svg?branch=master)](http://travis-ci.org/1001Pharmacies/geolocation-bundle) [![Total Downloads](https://poser.pugx.org/1001Pharmacies/geolocation-bundle/downloads.png)](https://packagist.org/packages/1001Pharmacies/geolocation-bundle) [![Latest Stable Version](https://poser.pugx.org/1001Pharmacies/geolocation-bundle/v/stable.png)](https://packagist.org/packages/1001Pharmacies/geolocation-bundle)
+
 Provides an abstraction layer for geocoding services. This bundle can be also used to split geocoding's calculation between a set of external geocoding service.
 
 ### Supported providers
@@ -99,7 +101,7 @@ Or update the `composer.json` file :
 
 ```json
 "require": {
-    "1001pharmacies/geolocation-bundle": "1.*"
+    "1001pharmacies/geolocation-bundle": "~1.0"
 }
 ```
 
