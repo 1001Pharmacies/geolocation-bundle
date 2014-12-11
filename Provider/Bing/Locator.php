@@ -11,7 +11,7 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Provider\Bing;
 
-use GuzzleHttp\Client as HttpClient;
+use Guzzle\Http\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;

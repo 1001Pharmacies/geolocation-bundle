@@ -63,7 +63,7 @@ class MeupGeoLocationExtension extends Extension
         $container->setDefinition(
             'meup_geolocation.http_client',
             new Definition(
-                'GuzzleHttp\Client'
+                'Guzzle\Http\Client'
             )
         );
 

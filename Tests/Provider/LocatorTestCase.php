@@ -22,7 +22,7 @@ class LocatorTestCase extends \PHPUnit_Framework_TestCase
     public function getClient($filename, $path = __DIR__)
     {
         $response = $this
-            ->getMockBuilder('GuzzleHttp\Message\Response')
+            ->getMockBuilder('Guzzle\Http\Message\Response')
             ->disableOriginalConstructor()
             ->getMock()
         ;
@@ -41,7 +41,7 @@ class LocatorTestCase extends \PHPUnit_Framework_TestCase
         ;
 
         $client = $this
-            ->getMockBuilder('GuzzleHttp\Client')
+            ->getMockBuilder('Guzzle\Http\Client')
             ->disableOriginalConstructor()
             ->getMock()
         ;
