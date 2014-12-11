@@ -25,6 +25,24 @@ use Meup\Bundle\GeoLocationBundle\Tests\Provider\LocatorTestCase;
 class LocatorTest extends LocatorTestCase
 {
     /**
+     * @param string $result_filename
+     *
+     * @return GoogleLocator
+     */
+    public function getLocator($result_filename)
+    {
+        return new GoogleLocator(
+            new GoogleHydrator(
+                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
+                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
+            ),
+            $this->getClient($result_filename, __DIR__),
+            null, // api_key
+            'https://maps.googleapis.com/maps/api/geocode/json'
+        );
+    }
+
+    /**
      *
      */
     public function testGetCoordinates()
@@ -34,15 +52,10 @@ class LocatorTest extends LocatorTestCase
             '250 rue du Thor, 34000 Montpellier'
         );
 
-        $locator = new GoogleLocator(
-            new GoogleHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
-            ),
-            $this->getClient('get-coordinates-result.json', __DIR__)
-        );
-
-        $coordinates = $locator->locate($address);
+        $coordinates = $this
+            ->getLocator('get-coordinates-result.json')
+            ->locate($address)
+        ;
 
         $this->assertEquals(
             array(43.6184254, 3.9160863),
@@ -63,17 +76,12 @@ class LocatorTest extends LocatorTestCase
             '250 rue du Thor, 34000 Montpellier'
         );
 
-        $locator = new GoogleLocator(
-            new GoogleHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
-            ),
-            $this->getClient('zero-results.json', __DIR__)
-        );
-
         $this->setExpectedException('Exception');
 
-        $coordinates = $locator->locate($address);
+        $this
+            ->getLocator('zero-results.json')
+            ->locate($address)
+        ;
     }
 
     /**
@@ -87,15 +95,10 @@ class LocatorTest extends LocatorTestCase
             ->setLongitude(3.9162419)
         ;
 
-        $locator = new GoogleLocator(
-            new GoogleHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
-            ),
-            $this->getClient('get-address-result.json', __DIR__)
-        );
-
-        $address = $locator->locate($coordinates);
+        $address = $this
+            ->getLocator('get-address-result.json')
+            ->locate($coordinates)
+        ;
 
         $this->assertEquals(
             '640 Rue du Mas de Verchant, 34000 Montpellier, France',

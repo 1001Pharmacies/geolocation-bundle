@@ -13,31 +13,55 @@ namespace Meup\Bundle\GeoLocationBundle\Provider\Bing;
 
 use GuzzleHttp\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
-use Meup\Bundle\GeoLocationBundle\Hydrator\Hydrator as BaseHydrator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 
 /**
- * 
+ * Bing's Locations API
+ *
+ * @link http://msdn.microsoft.com/en-us/library/ff701715.aspx
  */
 class Locator extends BaseLocator
 {
     /**
-     *
+     * @var HydratorInterface
      */
-    public function __construct(HydratorInterface $hydrator, HttpClient $client, $api_key)
+    protected $hydrator;
+
+    /**
+     * @var HttpClient
+     */
+    protected $client;
+
+    /**
+     * @var string 
+     */
+    protected $api_key;
+
+    /**
+     * @var string 
+     */
+    protected $api_endpoint;
+
+    /**
+     * @param HydratorInterface $hydrator
+     * @param HttpClient $client
+     * @param string $api_key
+     * @param string $api_endpoint
+     */
+    public function __construct(HydratorInterface $hydrator, HttpClient $client, $api_key, $api_endpoint)
     {
-        $this->hydrator = $hydrator;
-        $this->client = $client;
-        $this->api_key = $api_key;
-        $this->api_endpoint = 'http://dev.virtualearth.net/REST/v1/Locations/';
+        $this->hydrator     = $hydrator;
+        $this->client       = $client;
+        $this->api_key      = $api_key;
+        $this->api_endpoint = $api_endpoint;
     }
 
     /**
      * {@inheritDoc}
      *
-     * @doc http://msdn.microsoft.com/en-us/library/ff701711.aspx
+     * @link http://msdn.microsoft.com/en-us/library/ff701711.aspx
      */
     public function getCoordinates(AddressInterface $address)
     {
@@ -56,14 +80,14 @@ class Locator extends BaseLocator
 
         return $this
             ->hydrator
-            ->hydrate($response, BaseHydrator::TYPE_COORDINATES)
+            ->hydrate($response, Hydrator::TYPE_COORDINATES)
         ;
     }
 
     /**
      * {@inheritDoc}
      *
-     * @doc http://msdn.microsoft.com/en-us/library/ff701710.aspx
+     * @link http://msdn.microsoft.com/en-us/library/ff701710.aspx
      */
     public function getAddress(CoordinatesInterface $coordinates)
     {
@@ -83,7 +107,7 @@ class Locator extends BaseLocator
 
         return $this
             ->hydrator
-            ->hydrate($response, BaseHydrator::TYPE_ADDRESS)
+            ->hydrate($response, Hydrator::TYPE_ADDRESS)
         ;
     }
 }

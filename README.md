@@ -99,7 +99,7 @@ Or update the `composer.json` file :
 
 ```json
 "require": {
-    "1001pharmacies/geolocation-bundle": "1.0"
+    "1001pharmacies/geolocation-bundle": "1.*"
 }
 ```
 

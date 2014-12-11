@@ -11,12 +11,10 @@
 
 namespace Meup\Bundle\GeoLocationBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -30,15 +28,17 @@ class MeupGeoLocationExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration(
+            new Configuration(), 
+            $configs
+        );
 
         $container->setDefinition(
             'meup_geolocation.address_factory',
             new Definition(
                 'Meup\Bundle\GeoLocationBundle\Factory\AddressFactory',
                 array(
-                    'Meup\Bundle\GeoLocationBundle\Model\Address'
+                    'Meup\Bundle\GeoLocationBundle\Model\Address',
                 )
             )
         );
@@ -48,7 +48,7 @@ class MeupGeoLocationExtension extends Extension
             new Definition(
                 'Meup\Bundle\GeoLocationBundle\Factory\CoordinatesFactory',
                 array(
-                    'Meup\Bundle\GeoLocationBundle\Model\Coordinates'
+                    'Meup\Bundle\GeoLocationBundle\Model\Coordinates',
                 )
             )
         );
@@ -71,7 +71,10 @@ class MeupGeoLocationExtension extends Extension
 
             $hydrator = sprintf('meup_geolocation.%s_hydrator', $name);
 
-            $container->setParameter(sprintf('geolocation_%s_api_key', $name), 'null');
+            $container->setParameter(
+                sprintf('geolocation_%s_api_key', $name),
+                'null'
+            );
 
             $container->setDefinition(
                 $hydrator,
@@ -90,8 +93,10 @@ class MeupGeoLocationExtension extends Extension
                     new Reference($hydrator),
                     new Reference('meup_geolocation.http_client'),
                     $params['api_key']
+                    $params['api_endpoint']
                 )
             );
+            
             $definition->addTag('meup_geolocation.locator');
 
             $container->setDefinition(
@@ -101,5 +106,4 @@ class MeupGeoLocationExtension extends Extension
 
         }
     }
-
 }

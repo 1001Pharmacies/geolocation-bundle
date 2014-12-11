@@ -25,6 +25,24 @@ use Meup\Bundle\GeoLocationBundle\Tests\Provider\LocatorTestCase;
 class LocatorTest extends LocatorTestCase
 {
     /**
+     * @param string $result_filename
+     *
+     * @return BingLocator
+     */
+    protected function getLocator($result_filename)
+    {
+        return new BingLocator(
+            new BingHydrator(
+                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
+                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
+            ),
+            $this->getClient($result_filename, __DIR__),
+            'api-key',
+            'http://dev.virtualearth.net/REST/v1/Locations/'
+        );
+    }
+
+    /**
      *
      */
     public function testGetCoordinates()
@@ -34,16 +52,10 @@ class LocatorTest extends LocatorTestCase
             '250 rue du Thor, 34000 Montpellier'
         );
 
-        $locator = new BingLocator(
-            new BingHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
-            ),
-            $this->getClient('get-coordinates-result.json', __DIR__),
-            'api-key'
-        );
-
-        $coordinates = $locator->locate($address);
+        $coordinates = $this
+            ->getLocator('get-coordinates-result.json')
+            ->locate($address)
+        ;
 
         $this->assertEquals(
             array(43.617723, 3.915721),
@@ -65,16 +77,10 @@ class LocatorTest extends LocatorTestCase
             ->setLongitude(3.9162419)
         ;
 
-        $locator = new BingLocator(
-            new BingHydrator(
-                new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
-                new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
-            ),
-            $this->getClient('get-address-result.json', __DIR__),
-            'api-key'
-        );
-
-        $address = $locator->locate($coordinates);
+        $address = $this
+            ->getLocator('get-address-result.json')
+            ->locate($coordinates)
+        ;
 
         $this->assertEquals(
             'Sigean, Aude, France',

@@ -13,29 +13,56 @@ namespace Meup\Bundle\GeoLocationBundle\Provider\Google;
 
 use GuzzleHttp\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
-use Meup\Bundle\GeoLocationBundle\Hydrator\Hydrator as BaseHydrator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 
 /**
+ * Google's Geocoding API
  *
+ * @link https://developers.google.com/maps/documentation/geocoding/
  */
 class Locator extends BaseLocator
 {
     /**
-     * 
+     * @var HydratorInterface
      */
-    public function __construct(HydratorInterface $hydrator, HttpClient $http_client, $api_key = null)
+    protected $hydrator;
+
+    /**
+     * @var HttpClient
+     */
+    protected $client;
+
+    /**
+     * @var string 
+     */
+    protected $api_key;
+
+    /**
+     * @var string 
+     */
+    protected $api_endpoint;
+
+    /**
+     * @param HydratorInterface $hydrator
+     * @param HttpClient $client
+     * @param string $api_key
+     * @param string $api_endpoint
+     */
+    public function __construct(HydratorInterface $hydrator, HttpClient $client, $api_key = null, $api_endpoint)
     {
-        $this->hydrator = $hydrator;
-        $this->api_key = $api_key;
-        $this->api_endpoint = 'https://maps.googleapis.com/maps/api/geocode/json';
-        $this->http_client = $http_client;
+        $this->hydrator     = $hydrator;
+        $this->client       = $client;
+        $this->api_key      = $api_key;
+        $this->api_endpoint = $api_endpoint;
     }
 
     /**
+     * @param string $type
+     * @param Array $response
      *
+     * @return \Meup\Bundle\GeoLocationBundle\Model\LocationInterface
      */
     protected function populate($type, $response)
     {
@@ -57,9 +84,9 @@ class Locator extends BaseLocator
     public function getCoordinates(AddressInterface $address)
     {
         return $this->populate(
-            BaseHydrator::TYPE_COORDINATES,
+            Hydrator::TYPE_COORDINATES,
             $this
-                ->http_client
+                ->client
                 ->get(
                     sprintf(
                         '%s?address=%s&key=%s',
@@ -78,9 +105,9 @@ class Locator extends BaseLocator
     public function getAddress(CoordinatesInterface $coordinates)
     {
         return $this->populate(
-            BaseHydrator::TYPE_ADDRESS,
+            Hydrator::TYPE_ADDRESS,
             $this
-                ->http_client
+                ->client
                 ->get(
                     sprintf(
                         '%s?latlng=%d,%d&key=%s',

@@ -19,6 +19,7 @@ meup_geolocation:
 ### Factories configuration
 
 ```yaml
+meup_geolocation:
     address:
         factory_class: Acme\Bundle\AcmeBundle\Factory\AddressFactory
     coordinates:
@@ -32,6 +33,15 @@ Custom Hydrator
 
 Configuration reference
 -----------------------
+
+The `app/config/parameters.yml` will contains your API keys :
+
+```yaml
+parameters:
+    # ...
+    geolocation_google_api_key: your_google_api_key
+    geolocation_bing_api_key:   your_bing_api_key
+```
 
 you can configure your `app/config/config.yml` with the following
 
@@ -54,13 +64,4 @@ meup_geolocation:
             api_endpoint:   http://dev.virtualearth.net/REST/v1/Locations/
             locator_class:  Meup\Bundle\GeoLocationBundle\Provider\Bing\Locator
             hydrator_class: Meup\Bundle\GeoLocationBundle\Provider\Bing\Hydrator
-```
-
-The `app/config/parameters.yml` will contains your API keys :
-
-```yaml
-parameters:
-    # ...
-    geolocation_google_api_key: your_google_api_key
-    geolocation_bing_api_key:   your_bing_api_key
 ```
