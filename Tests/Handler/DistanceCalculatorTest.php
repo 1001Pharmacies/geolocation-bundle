@@ -27,16 +27,22 @@ class DistanceCalculatorTest extends \PHPUnit_Framework_TestCase
             'Meup\Bundle\GeoLocationBundle\Handler\DistanceCalculator'
         );
 
+        $paris = new Coordinates();
+        $paris
+            ->setLatitude(48.856667)
+            ->setLongitude(2.350987)
+        ;
+
+        $lyon = new Coordinates();
+        $lyon
+            ->setLatitude(45.767299)
+            ->setLongitude(4.834329)
+        ;
+
         $this->assertEquals(
             391.613,
             $distance_calculator->getDistance(
-                (new Coordinates())
-                    ->setLatitude(48.856667)
-                    ->setLongitude(2.350987)
-                ,
-                (new Coordinates())
-                    ->setLatitude(45.767299)
-                    ->setLongitude(4.834329)
+                $paris, $lyon
             )
         );
     }
