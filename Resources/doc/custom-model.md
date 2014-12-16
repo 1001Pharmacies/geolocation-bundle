@@ -9,7 +9,7 @@ You can write your own model classes and then [configure the bundle](configurati
 ### With interfaces
 
 ```php
-namespace Acme\Bundle\AcmeBundle\Model;
+namespace Acme\Bundle\AcmeBundle\Entity;
 
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 
@@ -84,7 +84,7 @@ class Address implements AddressInterface
 ### With inheritance
 
 ```php
-namespace Acme\Bundle\AcmeBundle\Model;
+namespace Acme\Bundle\AcmeBundle\Entity;
 
 use Meup\Bundle\GeoLocationBundle\Model\Coordinates as BaseCoordinates;
 
@@ -113,4 +113,55 @@ Customize the factories
 You can write your own factories and then [configure the bundle](configuration.md#factories-configuration) to use them.
 
 ```php
+namespace Acme\Bundle\AcmeBundle\Doctrine;
+
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+
+use Acme\Bundle\AcmeBundle\Entity\Address;
+use Meup\Bundle\GeoLocationBundle\Factory\AddressFactoryInterface;
+
+class AddressManager implements AddressFactoryInterface
+{
+    protected $objectManager;
+    protected $class;
+    protected $repository;
+
+    public function __construct(ObjectManager $om, $class)
+    {
+        $metadata            = $om->getClassMetadata($class);
+        $this->objectManager = $om;
+        $this->repository    = $om->getRepository($class);
+        $this->class         = $metadata->getName();
+    }
+
+    public function create(Array $args = array())
+    {
+        $class = new \ReflectionClass($this->class);
+
+        return $class->newInstanceArgs($params);
+    }
+
+    public function update(Address $address, $andFlush = true)
+    {
+        $this->objectManager->persist($address);
+        if ($andFlush) {
+            $this->objectManager->flush();
+        }
+    }
+
+    public function delete(Address $address, $andFlush = true)
+    {
+        $this->objectManager->remove($address);
+        if ($andFlush) {
+            $this->objectManager->flush();
+        }
+    }
+
+    public function findAll()
+    {
+        return $this->repository->findAll();
+    }
+}
 ```

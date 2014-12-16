@@ -11,9 +11,9 @@ Configure your [custom model](custom-model.md) :
 ```yaml
 meup_geolocation:
     address:
-        entity_class: Acme\Bundle\AcmeBundle\Model\Address
+        entity_class: Acme\Bundle\AcmeBundle\Entity\Address
     coordinates:
-        entity_class: Acme\Bundle\AcmeBundle\Model\Coordinates
+        entity_class: Acme\Bundle\AcmeBundle\Entity\Coordinates
 ```
 
 ### Factories configuration
@@ -21,9 +21,9 @@ meup_geolocation:
 ```yaml
 meup_geolocation:
     address:
-        factory_class: Acme\Bundle\AcmeBundle\Factory\AddressFactory
+        factory_class: Acme\Bundle\AcmeBundle\Doctrine\AddressManager
     coordinates:
-        factory_class: Acme\Bundle\AcmeBundle\Factory\CoordinatesFactory
+        factory_class: Acme\Bundle\AcmeBundle\Doctrine\CoordinatesManager
 ```
 
 Custom Hydrator

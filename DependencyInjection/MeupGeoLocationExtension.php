@@ -34,6 +34,13 @@ class MeupGeoLocationExtension extends Extension
         );
 
         $container->setDefinition(
+            'meup_geolocation.distance_calculator', 
+            new Definition(
+                'Meup\Bundle\GeoLocationBundle\Handler\DistanceCalculator'
+            )
+        );
+
+        $container->setDefinition(
             'meup_geolocation.address_factory',
             new Definition(
                 'Meup\Bundle\GeoLocationBundle\Factory\AddressFactory',
