@@ -75,6 +75,7 @@ class Locator extends BaseLocator
                     $this->api_key
                 )
             )
+            ->send()
             ->json()
         ;
 
@@ -102,6 +103,7 @@ class Locator extends BaseLocator
                     $this->api_key
                 )
             )
+            ->send()
             ->json()
         ;
 

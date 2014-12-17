@@ -40,6 +40,16 @@ class LocatorTestCase extends \PHPUnit_Framework_TestCase
             )
         ;
 
+        $request = $this
+            ->getMockBuilder('Guzzle\Http\Message\Request')
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+        $request
+            ->method('send')
+            ->willReturn($response)
+        ;
+
         $client = $this
             ->getMockBuilder('Guzzle\Http\Client')
             ->disableOriginalConstructor()
@@ -47,7 +57,7 @@ class LocatorTestCase extends \PHPUnit_Framework_TestCase
         ;
         $client
             ->method('get')
-            ->willReturn($response)
+            ->willReturn($request)
         ;
 
         return $client;
