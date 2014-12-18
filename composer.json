@@ -19,6 +19,7 @@
         "guzzle/http": "~3.9"
     },
     "require-dev": {
+        "symfony/symfony":           "2.3.*",
         "phpunit/phpunit":           "4.*",
         "squizlabs/php_codesniffer": "1.*",
         "sebastian/phpcpd":          "2.*",
