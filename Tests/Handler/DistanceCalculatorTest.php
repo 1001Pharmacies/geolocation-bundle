@@ -12,6 +12,7 @@
 namespace Meup\Bundle\GeoLocationBundle\Tests\Handler;
 
 use Meup\Bundle\GeoLocationBundle\Model\Coordinates;
+use Meup\Bundle\GeoLocationBundle\Handler\DistanceCalculator;
 
 /**
  *
@@ -23,9 +24,7 @@ class DistanceCalculatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDistance()
     {
-        $distance_calculator = $this->getMockForAbstractClass(
-            'Meup\Bundle\GeoLocationBundle\Handler\DistanceCalculator'
-        );
+        $calculator = new DistanceCalculator();
 
         $paris = new Coordinates();
         $paris
@@ -41,7 +40,7 @@ class DistanceCalculatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             391.613,
-            $distance_calculator->getDistance(
+            $calculator->getDistance(
                 $paris, $lyon
             )
         );
