@@ -19,6 +19,8 @@
                 <directory>./vendor</directory>
                 <directory>./Resources</directory>
                 <directory>./Tests</directory>
+                <directory>./cache</directory>
+                <directory>./build</directory>
             </exclude>
         </whitelist>
     </filter>

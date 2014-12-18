@@ -114,6 +114,16 @@ $bundles = array(
 );
 ```
 
+Setup your `app/config/parameters.yml` with your api keys :
+
+```yaml
+parameters:
+    # ...
+    geolocation_google_api_key: your_google_api_key
+    geolocation_bing_api_key:   your_bing_api_key
+```
+
+
 ### Customization
 
 *  [Model](Resources/doc/custom-model.md)

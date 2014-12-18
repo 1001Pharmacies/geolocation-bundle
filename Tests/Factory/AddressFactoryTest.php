@@ -14,19 +14,30 @@ namespace Meup\Bundle\GeoLocationBundle\Tests\Factory;
 use Meup\Bundle\GeoLocationBundle\Factory\AddressFactory;
 
 /**
- *
+ * 
  */
 class AddressFactoryTest extends \PHPUnit_Framework_TestCase
 {
+    protected $class = 'Meup\Bundle\GeoLocationBundle\Model\Address';
+
+    /**
+     * 
+     */
+    public function testFactoryInterface()
+    {
+        $factory = new AddressFactory($this->class);
+
+        $this->assertInstanceOf('Meup\Bundle\GeoLocationBundle\Factory\FactoryInterface', $factory);
+    }
+
     /**
      * 
      */
     public function testCreate()
     {
-        $class = 'Meup\Bundle\GeoLocationBundle\Model\Address';
-        $factory = new AddressFactory($class);
+        $factory = new AddressFactory($this->class);
 
-        $this->assertInstanceOf($class, $factory->create());
+        $this->assertInstanceOf($this->class, $factory->create());
     }
 
     /**
