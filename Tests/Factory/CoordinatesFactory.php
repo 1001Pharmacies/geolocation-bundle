@@ -21,12 +21,26 @@ class CoordinatesFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * 
      */
+    protected $class = 'Meup\Bundle\GeoLocationBundle\Model\Coordinates';
+
+    /**
+     * 
+     */
+    public function testFactoryInterface()
+    {
+        $factory = new CoordinatesFactory($this->class);
+
+        $this->assertInstanceOf('Meup\Bundle\GeoLocationBundle\Factory\CoordinatesFactoryInterface', $factory);
+    }
+
+    /**
+     * 
+     */
     public function testCreate()
     {
-        $class = 'Meup\Bundle\GeoLocationBundle\Model\Coordinates';
-        $factory = new CoordinatesFactory($class);
+        $factory = new CoordinatesFactory($this->class);
 
-        $this->assertInstanceOf($class, $factory->create());
+        $this->assertInstanceOf($this->class, $factory->create());
     }
 
     /**
