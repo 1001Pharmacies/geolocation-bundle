@@ -7,6 +7,7 @@
         <echo>phpcs    Detects standard violations on the code.</echo>
         <echo>phpcpd   Detects duplicate code portions.</echo>
         <echo>phpunit  Executes phpunit tests</echo>
+        <echo>apidoc   Generates API reference</echo>
     </target>
 
     <target name="test" depends="phpcs,phpcpd,phpunit"></target>
@@ -16,6 +17,8 @@
             <fileset dir="./">
                 <include name="**/*.php" />
                 <exclude name="vendor/" />
+                <exclude name="build/" />
+                <exclude name="cache/" />
             </fileset>
         </phpcodesniffer>
     </target>
@@ -29,6 +32,10 @@
 
     <target name="phpunit">
         <exec logoutput="true" dir="./" command="./bin/phpunit" />
+    </target>
+
+    <target name="apidoc">
+        <exec logoutput="true" dir="./" command="./bin/sami.php update sami.php" />
     </target>
 
 </project>
