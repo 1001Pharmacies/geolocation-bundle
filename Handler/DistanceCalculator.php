@@ -14,9 +14,9 @@ namespace Meup\Bundle\GeoLocationBundle\Handler;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 
 /**
- * 
+ *
  */
-abstract class DistanceCalculator implements DistanceCalculatorInterface
+class DistanceCalculator implements DistanceCalculatorInterface
 {
     const EARTH_RADIUS = 6378137;
 
