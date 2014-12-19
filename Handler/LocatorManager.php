@@ -11,7 +11,10 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Handler;
 
+use Psr\Log\LoggerInterface;
 use Meup\Bundle\GeoLocationBundle\Model\LocationInterface;
+use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
+use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 
 /**
  *
@@ -22,6 +25,14 @@ class LocatorManager implements LocatorManagerInterface
      * @var Array
      */
     protected $locators = array();
+
+    /**
+     *
+     */
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * {@inheritDoc}
@@ -46,8 +57,38 @@ class LocatorManager implements LocatorManagerInterface
      */
     public function locate(LocationInterface $location)
     {
-        $key = rand(0, count($this->locators)-1);
+        $key     = rand(0, count($this->locators)-1);
+        $locator = $this->locators[$key];
+        $result  = $locator->locate($location);
 
-        return $this->locators[$key]->locate($location);
+        if ($location instanceof AddressInterface) {
+            $this
+                ->logger
+                ->debug(
+                    'Locate coordinates by address',
+                    array(
+                        'address'   => $location->getFullAddress(),
+                        'latitude'  => $result->getLatitude(),
+                        'longitude' => $result->getLongitude(),
+                    )
+                )
+            ;
+        }
+
+        if ($location instanceof CoordinatesInterface) {
+            $this
+                ->logger
+                ->debug(
+                    'Locate address by coordinates',
+                    array(
+                        'address'   => $result->getFullAddress(),
+                        'latitude'  => $location->getLatitude(),
+                        'longitude' => $location->getLongitude(),
+                    )
+                )
+            ;
+        }
+
+        return $result;
     }
 }
