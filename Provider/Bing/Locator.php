@@ -11,6 +11,7 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Provider\Bing;
 
+use Psr\Log\LoggerInterface;
 use Guzzle\Http\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
@@ -50,8 +51,9 @@ class Locator extends BaseLocator
      * @param string $api_key
      * @param string $api_endpoint
      */
-    public function __construct(HydratorInterface $hydrator, HttpClient $client, $api_key, $api_endpoint)
+    public function __construct(HydratorInterface $hydrator, HttpClient $client, LoggerInterface $logger, $api_key, $api_endpoint)
     {
+        parent::__construct($logger);
         $this->hydrator     = $hydrator;
         $this->client       = $client;
         $this->api_key      = $api_key;

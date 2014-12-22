@@ -11,7 +11,6 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Handler;
 
-use Psr\Log\LoggerInterface;
 use Meup\Bundle\GeoLocationBundle\Model\LocationInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
@@ -25,14 +24,6 @@ class LocatorManager implements LocatorManagerInterface
      * @var Array
      */
     protected $locators = array();
-
-    /**
-     *
-     */
-    public function __construct(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
 
     /**
      * {@inheritDoc}
@@ -62,17 +53,6 @@ class LocatorManager implements LocatorManagerInterface
         $result  = $locator->locate($location);
 
         if ($location instanceof AddressInterface) {
-            $this
-                ->logger
-                ->debug(
-                    'Locate coordinates by address',
-                    array(
-                        'address'   => $location->getFullAddress(),
-                        'latitude'  => $result->getLatitude(),
-                        'longitude' => $result->getLongitude(),
-                    )
-                )
-            ;
         }
 
         if ($location instanceof CoordinatesInterface) {
