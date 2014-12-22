@@ -31,12 +31,18 @@ class LocatorTest extends LocatorTestCase
      */
     protected function getLocator($result_filename)
     {
+        $logger = $this
+            ->getMockBuilder('Psr\Log\LoggerInterface')
+            ->getMockForAbstractClass()
+        ;
+
         return new BingLocator(
             new BingHydrator(
                 new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
                 new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
             ),
             $this->getClient($result_filename, __DIR__),
+            $logger,
             'api-key',
             'http://dev.virtualearth.net/REST/v1/Locations/'
         );

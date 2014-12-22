@@ -48,7 +48,7 @@ class MeupGeoLocationExtension extends Extension
     {
         $result = array();
 
-        foreach (['address', 'coordinates'] as $entity) {
+        foreach (array('address', 'coordinates') as $entity) {
             $result[] = $container->setDefinition(
                 sprintf('meup_geolocation.%s_factory', $entity),
                 new Definition(
@@ -80,9 +80,9 @@ class MeupGeoLocationExtension extends Extension
             'meup_geolocation.locator', 
             new Definition(
                 $config['locator_manager'],
-                [
+                array(
                     new Reference('logger'),
-                ]
+                )
             )
         );
     }

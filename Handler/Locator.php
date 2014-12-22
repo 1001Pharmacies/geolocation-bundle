@@ -54,19 +54,4 @@ abstract class Locator implements LocatorInterface
 
         return $location;
     }
-
-    protected function log(AddressInterface $address)
-    {
-        $this
-            ->logger
-            ->debug(
-                'Locate coordinates by address',
-                array(
-                    'address'   => $location->getFullAddress(),
-                    'latitude'  => $result->getLatitude(),
-                    'longitude' => $result->getLongitude(),
-                )
-            )
-        ;
-    }
 }
