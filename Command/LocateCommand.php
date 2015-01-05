@@ -36,7 +36,7 @@ class LocateCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $locator = $this
+        $this
             ->getContainer()
             ->get('meup_geolocation.locator')
         ;

@@ -34,8 +34,8 @@ class MeupGeoLocationExtension extends Extension
         );
 
         $factories = $this->loadFactories($config, $container);
-        $handlers  = $this->loadHandlers($config, $container);
-        $providers = $this->loadProviders($config, $container, $factories);
+        $this->loadHandlers($config, $container);
+        $this->loadProviders($config, $container, $factories);
     }
 
     /**
