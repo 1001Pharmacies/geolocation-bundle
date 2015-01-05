@@ -31,12 +31,18 @@ class LocatorTest extends LocatorTestCase
      */
     public function getLocator($result_filename)
     {
+        $logger = $this
+            ->getMockBuilder('Psr\Log\LoggerInterface')
+            ->getMockForAbstractClass()
+        ;
+
         return new GoogleLocator(
             new GoogleHydrator(
                 new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
                 new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
             ),
             $this->getClient($result_filename, __DIR__),
+            $logger,
             null, // api_key
             'https://maps.googleapis.com/maps/api/geocode/json'
         );

@@ -11,8 +11,6 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Hydrator;
 
-use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
-use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 use Meup\Bundle\GeoLocationBundle\Factory\AddressFactoryInterface;
 use Meup\Bundle\GeoLocationBundle\Factory\CoordinatesFactoryInterface;
 

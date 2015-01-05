@@ -11,6 +11,7 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Handler;
 
+use Psr\Log\LoggerInterface;
 use Meup\Bundle\GeoLocationBundle\Model\LocationInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
@@ -23,6 +24,19 @@ use Meup\Bundle\GeoLocationBundle\Handler\LocatorInterface;
  */
 abstract class Locator implements LocatorInterface
 {
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -33,84 +33,132 @@ class MeupGeoLocationExtension extends Extension
             $configs
         );
 
+        $factories = $this->loadFactories($config, $container);
+        $this->loadHandlers($config, $container);
+        $this->loadProviders($config, $container, $factories);
+    }
+
+    /**
+     * @param array $config
+     * @param ContainerBuilder $container
+     *
+     * @return Array<Definition>
+     */
+    protected function loadFactories(array $config, ContainerBuilder $container)
+    {
+        $result = array();
+
+        foreach (array('address', 'coordinates') as $entity) {
+            $result[] = $container->setDefinition(
+                sprintf('meup_geolocation.%s_factory', $entity),
+                new Definition(
+                    $config[$entity]['factory_class'],
+                    array(
+                        $config[$entity]['entity_class'],
+                    )
+                )
+            );
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param array $config
+     * @param ContainerBuilder $container
+     *
+     * @return void
+     */
+    protected function loadHandlers(array $config, ContainerBuilder $container)
+    {
         $container->setDefinition(
             'meup_geolocation.distance_calculator', 
-            new Definition(
-                'Meup\Bundle\GeoLocationBundle\Handler\DistanceCalculator'
-            )
-        );
-
-        $container->setDefinition(
-            'meup_geolocation.address_factory',
-            new Definition(
-                'Meup\Bundle\GeoLocationBundle\Factory\AddressFactory',
-                array(
-                    'Meup\Bundle\GeoLocationBundle\Model\Address',
-                )
-            )
-        );
-
-        $container->setDefinition(
-            'meup_geolocation.coordinates_factory',
-            new Definition(
-                'Meup\Bundle\GeoLocationBundle\Factory\CoordinatesFactory',
-                array(
-                    'Meup\Bundle\GeoLocationBundle\Model\Coordinates',
-                )
-            )
+            new Definition($config['handlers']['distance_calculator'])
         );
 
         $container->setDefinition(
             'meup_geolocation.locator', 
             new Definition(
-                'Meup\Bundle\GeoLocationBundle\Handler\LocatorManager'
+                $config['handlers']['locator_manager'],
+                array(
+                    new Reference('logger'),
+                )
             )
         );
+    }
 
-        $container->setDefinition(
+    /**
+     * @param array $config
+     * @param ContainerBuilder $container
+     *
+     * @return Array<Definition>
+     */
+    protected function loadProviders(array $config, ContainerBuilder $container, $model)
+    {
+        $http_client = $container->setDefinition(
             'meup_geolocation.http_client',
             new Definition(
                 'Guzzle\Http\Client'
             )
         );
 
+        $result = array();
+
         foreach ($config['providers'] as $name => $params) {
-
-            $hydrator = sprintf('meup_geolocation.%s_hydrator', $name);
-
-            $container->setParameter(
-                sprintf('geolocation_%s_api_key', $name),
-                'null'
+            $result[] = $this->loadProvider(
+                $container,
+                $name,
+                $params,
+                $http_client,
+                $model
             );
-
-            $container->setDefinition(
-                $hydrator,
-                new Definition(
-                    $params['hydrator_class'],
-                    array(
-                        new Reference('meup_geolocation.address_factory'),
-                        new Reference('meup_geolocation.coordinates_factory')
-                    )
-                )
-            );
-
-            $definition = new Definition(
-                $params['locator_class'],
-                array(
-                    new Reference($hydrator),
-                    new Reference('meup_geolocation.http_client'),
-                    $params['api_key'],
-                    $params['api_endpoint']
-                )
-            );
-            
-            $definition->addTag('meup_geolocation.locator');
-
-            $container->setDefinition(
-                sprintf('meup_geolocation.%s_locator', $name),
-                $definition
-            );
-
         }
+
+        return $result;
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param string $name
+     * @param array $params
+     * @param Definition $http_client
+     * @param Array<Definition> $factories
+     *
+     * @return Definition
+     */
+    protected function loadProvider(ContainerBuilder $container, $name, array $params, Definition $http_client, array $factories)
+    {
+        $container->setParameter(
+            sprintf('geolocation_%s_api_key', $name),
+            'null'
+        );
+
+        $hydrator = $container->setDefinition(
+            sprintf('meup_geolocation.%s_hydrator', $name),
+            new Definition(
+                $params['hydrator_class'],
+                $factories
+            )
+        );
+
+        $definition = new Definition(
+            $params['locator_class'],
+            array(
+                $hydrator,
+                $http_client,
+                new Reference('logger'),
+                $params['api_key'],
+                $params['api_endpoint']
+            )
+        );
+
+        $definition->addTag('meup_geolocation.locator');
+
+        $container->setDefinition(
+            sprintf('meup_geolocation.%s_locator', $name),
+            $definition
+        );
+
+        return $definition;
     }
 }
