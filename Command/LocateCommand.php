@@ -12,9 +12,7 @@
 namespace Meup\Bundle\GeoLocationBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -30,8 +28,6 @@ class LocateCommand extends ContainerAwareCommand
         $this
             ->setName('meup_geolocation:locator:locate')
             ->setDescription('Get the weekly movies sessions program.')
-            //->addArgument('name', InputArgument::OPTIONAL, 'Who do you want to greet?')
-            //->addOption('yell', null, InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters')
         ;
     }
 
