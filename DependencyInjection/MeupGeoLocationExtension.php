@@ -34,7 +34,7 @@ class MeupGeoLocationExtension extends Extension
         );
 
         $factories = $this->loadFactories($config, $container);
-        $handlers  = $this->loadHandlers($config['handlers'], $container);
+        $handlers  = $this->loadHandlers($config, $container);
         $providers = $this->loadProviders($config, $container, $factories);
     }
 
@@ -73,13 +73,13 @@ class MeupGeoLocationExtension extends Extension
     {
         $container->setDefinition(
             'meup_geolocation.distance_calculator', 
-            new Definition($config['distance_calculator'])
+            new Definition($config['handlers']['distance_calculator'])
         );
 
         $container->setDefinition(
             'meup_geolocation.locator', 
             new Definition(
-                $config['locator_manager'],
+                $config['handlers']['locator_manager'],
                 array(
                     new Reference('logger'),
                 )
