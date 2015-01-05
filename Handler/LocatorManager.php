@@ -20,6 +20,8 @@ use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
  */
 class LocatorManager implements LocatorManagerInterface
 {
+    protected $logger = null;
+
     /**
      * @var Array
      */
@@ -52,21 +54,34 @@ class LocatorManager implements LocatorManagerInterface
         $locator = $this->locators[$key];
         $result  = $locator->locate($location);
 
-        if ($location instanceof AddressInterface) {
-        }
-
-        if ($location instanceof CoordinatesInterface) {
-            $this
-                ->logger
-                ->debug(
-                    'Locate address by coordinates',
-                    array(
-                        'address'   => $result->getFullAddress(),
-                        'latitude'  => $location->getLatitude(),
-                        'longitude' => $location->getLongitude(),
+        if ($this->logger) {
+            if ($location instanceof AddressInterface) {
+                $this
+                    ->logger
+                    ->debug(
+                        'Geocoding : Find coordinates by address',
+                        array(
+                            'address'   => $location->getFullAddress(),
+                            'latitude'  => $result->getLatitude(),
+                            'longitude' => $result->getLongitude(),
+                        )
                     )
-                )
-            ;
+                ;
+            }
+
+            if ($location instanceof CoordinatesInterface) {
+                $this
+                    ->logger
+                    ->debug(
+                        'Geocoding : Locate address by coordinates',
+                        array(
+                            'address'   => $result->getFullAddress(),
+                            'latitude'  => $location->getLatitude(),
+                            'longitude' => $location->getLongitude(),
+                        )
+                    )
+                ;
+            }
         }
 
         return $result;
