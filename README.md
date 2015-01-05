@@ -1,7 +1,7 @@
 GeoLocation Bundle
 ==================
 
-[![Build Status](https://secure.travis-ci.org/1001Pharmacies/geolocation-bundle.svg?branch=master)](http://travis-ci.org/1001Pharmacies/geolocation-bundle) [![Total Downloads](https://poser.pugx.org/1001Pharmacies/geolocation-bundle/downloads.png)](https://packagist.org/packages/1001Pharmacies/geolocation-bundle) [![Latest Stable Version](https://poser.pugx.org/1001Pharmacies/geolocation-bundle/v/stable.png)](https://packagist.org/packages/1001Pharmacies/geolocation-bundle) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/202a484d-de56-4f3a-a0af-bb4aec1131e9/mini.png)](https://insight.sensiolabs.com/projects/202a484d-de56-4f3a-a0af-bb4aec1131e9)
+[![Build Status](https://secure.travis-ci.org/1001Pharmacies/geolocation-bundle.svg?branch=master)](http://travis-ci.org/1001Pharmacies/geolocation-bundle) [![Total Downloads](https://poser.pugx.org/1001Pharmacies/geolocation-bundle/downloads.png)](https://packagist.org/packages/1001Pharmacies/geolocation-bundle) [![Latest Stable Version](https://poser.pugx.org/1001Pharmacies/geolocation-bundle/v/stable.png)](https://packagist.org/packages/1001Pharmacies/geolocation-bundle)
 
 Provides an abstraction layer for geocoding services. This bundle can be also used to split geocoding's calculation between a set of external geocoding service.
 
