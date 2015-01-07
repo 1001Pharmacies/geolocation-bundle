@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\GeoLocationBundle\Provider\Google;
+namespace Meup\Bundle\GeoLocationBundle\Provider\Nominatim;
 
 use Guzzle\Http\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
@@ -18,9 +18,9 @@ use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 
 /**
- * Google's Geocoding API
+ * Nominatim's Locations API
  *
- * @link https://developers.google.com/maps/documentation/geocoding/
+ * @link http://wiki.openstreetmap.org/wiki/Nominatim
  */
 class Locator extends BaseLocator
 {
@@ -59,45 +59,27 @@ class Locator extends BaseLocator
     }
 
     /**
-     * @param string $type
-     * @param Array $response
-     *
-     * @return \Meup\Bundle\GeoLocationBundle\Model\LocationInterface
-     */
-    protected function populate($type, $response)
-    {
-        if ($response['status']!='OK') {
-            throw new \Exception('No results found.');
-        }
-        return $this
-            ->hydrator
-            ->hydrate(
-                $response['results'],
-                $type
-            )
-        ;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function getCoordinates(AddressInterface $address)
     {
-        return $this->populate(
-            Hydrator::TYPE_COORDINATES,
-            $this
-                ->client
-                ->get(
-                    sprintf(
-                        '%s?address=%s&key=%s',
-                        $this->api_endpoint,
-                        $address->getFullAddress(),
-                        $this->api_key
-                    )
+        $response = $this
+            ->client
+            ->get(
+                sprintf(
+                    '%ssearch/%s?o=json',
+                    $this->api_endpoint,
+                    $address->getFullAddress()
                 )
-                ->send()
-                ->json()
-        );
+            )
+            ->send()
+            ->json()
+        ;
+
+        return $this
+            ->hydrator
+            ->hydrate($response, Hydrator::TYPE_COORDINATES)
+        ;
     }
 
     /**
@@ -105,21 +87,23 @@ class Locator extends BaseLocator
      */
     public function getAddress(CoordinatesInterface $coordinates)
     {
-        return $this->populate(
-            Hydrator::TYPE_ADDRESS,
-            $this
-                ->client
-                ->get(
-                    sprintf(
-                        '%s?latlng=%d,%d&key=%s',
-                        $this->api_endpoint,
-                        $coordinates->getLatitude(),
-                        $coordinates->getLongitude(),
-                        $this->api_key
-                    )
+        $response = $this
+            ->client
+            ->get(
+                sprintf(
+                    '%sreverse?format=json&lat=%d&lon=%d',
+                    $this->api_endpoint,
+                    $coordinates->getLatitude(),
+                    $coordinates->getLongitude()
                 )
-                ->send()
-                ->json()
-        );
+            )
+            ->send()
+            ->json()
+        ;
+
+        return $this
+            ->hydrator
+            ->hydrate($response, Hydrator::TYPE_ADDRESS)
+        ;
     }
 }
