@@ -41,6 +41,8 @@ printf(
 // output : 43.6190815,3.9162419
 ```
 
+The `geolocation-bundle` only provides library ands services. But you can easily [integrate it in your applications](Resources/doc/example.md).
+
 #### Address by Coordinates
 
 ```php
@@ -123,6 +125,7 @@ parameters:
     geolocation_bing_api_key:   your_bing_api_key
 ```
 
+See detailed [Google](Resources/doc/provider/google.md#create-an-api-key) and [Bing](Resources/doc/provider/bing.md#create-an-api-key) documentation to know how to retrieve api keys.
 
 ### Customization
 
