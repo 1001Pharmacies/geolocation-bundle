@@ -38,7 +38,7 @@ class LocatorTest extends LocatorTestCase
             ),
             $this->getClient($result_filename, __DIR__),
             null, // api_key
-            'https://maps.googleapis.com/maps/api/geocode/json'
+            'http://nominatim.openstreetmap.org/'
         );
     }
 
@@ -49,7 +49,7 @@ class LocatorTest extends LocatorTestCase
     {
         $address = new Address();
         $address->setFullAddress(
-            '250 rue du Thor, 34000 Montpellier'
+            'rue du thor, 34000 montpellier'
         );
 
         $coordinates = $this
@@ -58,7 +58,7 @@ class LocatorTest extends LocatorTestCase
         ;
 
         $this->assertEquals(
-            array(43.6184254, 3.9160863),
+            array(43.6171194, 3.9151111),
             array(
                 $coordinates->getLatitude(),
                 $coordinates->getLongitude()
@@ -69,20 +69,20 @@ class LocatorTest extends LocatorTestCase
     /**
      *
      */
-    public function testGetWithNoResults()
-    {
-        $address = new Address();
-        $address->setFullAddress(
-            '250 rue du Thor, 34000 Montpellier'
-        );
+    // public function testGetWithNoResults()
+    // {
+    //     $address = new Address();
+    //     $address->setFullAddress(
+    //         'impasse fino bricka, 34000 montpellier'
+    //     );
 
-        $this->setExpectedException('Exception');
+    //     $this->setExpectedException('Exception');
 
-        $this
-            ->getLocator('zero-results.json')
-            ->locate($address)
-        ;
-    }
+    //     $this
+    //         ->getLocator('zero-results.json')
+    //         ->locate($address)
+    //     ;
+    // }
 
     /**
      *
@@ -91,8 +91,8 @@ class LocatorTest extends LocatorTestCase
     {
         $coordinates = new Coordinates();
         $coordinates
-            ->setLatitude(43.6190815)
-            ->setLongitude(3.9162419)
+            ->setLatitude(43.6014158)
+            ->setLongitude(3.8726549)
         ;
 
         $address = $this
@@ -101,7 +101,7 @@ class LocatorTest extends LocatorTestCase
         ;
 
         $this->assertEquals(
-            '640 Rue du Mas de Verchant, 34000 Montpellier, France',
+            'Rue du Thor, Millénaire, Port Marianne, Montpellier, Hérault, Languedoc-Roussillon, France métropolitaine, 34000;34070;34080;34090, France',
             $address->getFullAddress()
         );
     }

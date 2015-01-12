@@ -26,7 +26,7 @@ class Hydrator extends BaseHydrator
     public function populateAddress(AddressInterface $address, Array $data)
     {
         return $address->setFullAddress(
-            $data[0]['display_name']
+            $data['display_name']
         );
     }
 

@@ -21,7 +21,7 @@ interface HydratorInterface
 {
     /**
      * @param Array $data
-     * 
+     *
      * @return LocationInterface
      */
     public function hydrate(Array $data, $entity_name);
