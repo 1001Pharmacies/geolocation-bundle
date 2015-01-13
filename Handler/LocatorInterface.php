@@ -11,7 +11,6 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Handler;
 
-use Meup\Bundle\GeoLocationBundle\Model\LocationInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 

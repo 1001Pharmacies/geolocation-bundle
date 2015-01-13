@@ -11,6 +11,7 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Provider\Google;
 
+use Psr\Log\LoggerInterface;
 use Guzzle\Http\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
@@ -47,11 +48,13 @@ class Locator extends BaseLocator
     /**
      * @param HydratorInterface $hydrator
      * @param HttpClient $client
+     * @param LoggerInterface $logger
      * @param string $api_key
      * @param string $api_endpoint
      */
-    public function __construct(HydratorInterface $hydrator, HttpClient $client, $api_key = null, $api_endpoint)
+    public function __construct(HydratorInterface $hydrator, HttpClient $client, LoggerInterface $logger, $api_key = null, $api_endpoint)
     {
+        parent::__construct($logger);
         $this->hydrator     = $hydrator;
         $this->client       = $client;
         $this->api_key      = $api_key;
@@ -83,7 +86,7 @@ class Locator extends BaseLocator
      */
     public function getCoordinates(AddressInterface $address)
     {
-        return $this->populate(
+        $coordinates = $this->populate(
             Hydrator::TYPE_COORDINATES,
             $this
                 ->client
@@ -98,6 +101,21 @@ class Locator extends BaseLocator
                 ->send()
                 ->json()
         );
+
+        $this
+            ->logger
+            ->debug(
+                'Locate coordinates by address',
+                array(
+                    'provider'  => 'google',
+                    'address'   => $address->getFullAddress(),
+                    'latitude'  => $coordinates->getLatitude(),
+                    'longitude' => $coordinates->getLongitude(),
+                )
+            )
+        ;
+
+        return $coordinates;
     }
 
     /**
@@ -105,7 +123,7 @@ class Locator extends BaseLocator
      */
     public function getAddress(CoordinatesInterface $coordinates)
     {
-        return $this->populate(
+        $address = $this->populate(
             Hydrator::TYPE_ADDRESS,
             $this
                 ->client
@@ -121,5 +139,20 @@ class Locator extends BaseLocator
                 ->send()
                 ->json()
         );
+
+        $this
+            ->logger
+            ->debug(
+                'Locate address by coordinates',
+                array(
+                    'provider'  => 'google',
+                    'address'   => $address->getFullAddress(),
+                    'latitude'  => $coordinates->getLatitude(),
+                    'longitude' => $coordinates->getLongitude(),
+                )
+            )
+        ;
+
+        return $address;
     }
 }

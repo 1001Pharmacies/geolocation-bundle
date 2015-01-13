@@ -12,12 +12,16 @@
 namespace Meup\Bundle\GeoLocationBundle\Handler;
 
 use Meup\Bundle\GeoLocationBundle\Model\LocationInterface;
+use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
+use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 
 /**
  *
  */
 class LocatorManager implements LocatorManagerInterface
 {
+    protected $logger = null;
+
     /**
      * @var Array
      */
@@ -46,8 +50,40 @@ class LocatorManager implements LocatorManagerInterface
      */
     public function locate(LocationInterface $location)
     {
-        $key = rand(0, count($this->locators)-1);
+        $key     = rand(0, count($this->locators)-1);
+        $locator = $this->locators[$key];
+        $result  = $locator->locate($location);
 
-        return $this->locators[$key]->locate($location);
+        if ($this->logger) {
+            if ($location instanceof AddressInterface) {
+                $this
+                    ->logger
+                    ->debug(
+                        'Geocoding : Find coordinates by address',
+                        array(
+                            'address'   => $location->getFullAddress(),
+                            'latitude'  => $result->getLatitude(),
+                            'longitude' => $result->getLongitude(),
+                        )
+                    )
+                ;
+            }
+
+            if ($location instanceof CoordinatesInterface) {
+                $this
+                    ->logger
+                    ->debug(
+                        'Geocoding : Locate address by coordinates',
+                        array(
+                            'address'   => $result->getFullAddress(),
+                            'latitude'  => $location->getLatitude(),
+                            'longitude' => $location->getLongitude(),
+                        )
+                    )
+                ;
+            }
+        }
+
+        return $result;
     }
 }

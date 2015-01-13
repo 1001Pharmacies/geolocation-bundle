@@ -29,7 +29,9 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
         ;
 
         $locator = $this
-            ->getMockForAbstractClass('Meup\Bundle\GeoLocationBundle\Handler\Locator')
+            ->getMockBuilder('Meup\Bundle\GeoLocationBundle\Handler\Locator')
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass()
         ;
         $locator->expects($this->any())
             ->method('getAddress')
@@ -55,7 +57,9 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
         ;
 
         $locator = $this
-            ->getMockForAbstractClass('Meup\Bundle\GeoLocationBundle\Handler\Locator')
+            ->getMockBuilder('Meup\Bundle\GeoLocationBundle\Handler\Locator')
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass()
         ;
         $locator->expects($this->any())
             ->method('getCoordinates')
@@ -77,7 +81,9 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
             ->getMockForAbstractClass('Meup\Bundle\GeoLocationBundle\Model\Location')
         ;
         $locator = $this
-            ->getMockForAbstractClass('Meup\Bundle\GeoLocationBundle\Handler\Locator')
+            ->getMockBuilder('Meup\Bundle\GeoLocationBundle\Handler\Locator')
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass()
         ;
 
         $this->assertEquals(

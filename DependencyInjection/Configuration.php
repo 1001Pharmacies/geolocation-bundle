@@ -48,6 +48,14 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
+                ->arrayNode('handlers')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('distance_calculator')->defaultValue('Meup\Bundle\GeoLocationBundle\Handler\DistanceCalculator')->end()
+                        ->scalarNode('locator_manager')->defaultValue('Meup\Bundle\GeoLocationBundle\Handler\LocatorManager')->end()
+                    ->end()
+                ->end()
+
                 ->arrayNode('providers')
                     ->addDefaultsIfNotSet()
                     ->children()
