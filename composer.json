@@ -16,6 +16,7 @@
     ],
     "require": {
         "php":         ">=5.3.3",
+        "ext-curl":    "*",
         "guzzle/http": "~3.9"
     },
     "require-dev": {

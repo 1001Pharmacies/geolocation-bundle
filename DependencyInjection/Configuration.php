@@ -72,6 +72,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('nominatim')
                             ->addDefaultsIfNotSet()
                             ->children()
+                                ->scalarNode('api_key')->defaultValue('%geolocation_nominatim_api_key%')->end()
                                 ->scalarNode('api_endpoint')->defaultValue('http://nominatim.openstreetmap.org/')->end()
                                 ->scalarNode('locator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Nominatim\Locator')->end()
                                 ->scalarNode('hydrator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Nominatim\Hydrator')->end()
