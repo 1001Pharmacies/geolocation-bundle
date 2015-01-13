@@ -1,8 +1,8 @@
-Bing's Map API
-==============
+Nominatim API
+=============
 
 Doc
------------------
+---
 
 Go to [www.bingmapsportal.com](http://wiki.openstreetmap.org/wiki/Nominatim).
 
