@@ -31,12 +31,18 @@ class LocatorTest extends LocatorTestCase
      */
     public function getLocator($result_filename)
     {
+        $logger = $this
+            ->getMockBuilder('Psr\Log\LoggerInterface')
+            ->getMockForAbstractClass()
+        ;
+
         return new NominatimLocator(
             new NominatimHydrator(
                 new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
                 new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
             ),
             $this->getClient($result_filename, __DIR__),
+            $logger,
             null, // api_key
             'http://nominatim.openstreetmap.org/'
         );
@@ -69,20 +75,20 @@ class LocatorTest extends LocatorTestCase
     /**
      *
      */
-    // public function testGetWithNoResults()
-    // {
-    //     $address = new Address();
-    //     $address->setFullAddress(
-    //         'impasse fino bricka, 34000 montpellier'
-    //     );
+    public function testGetWithNoResults()
+    {
+        $address = new Address();
+        $address->setFullAddress(
+            'impasse fino bricka, 34000 montpellier'
+        );
 
-    //     $this->setExpectedException('Exception');
+        $this->setExpectedException('Exception');
 
-    //     $this
-    //         ->getLocator('zero-results.json')
-    //         ->locate($address)
-    //     ;
-    // }
+        $this
+            ->getLocator('zero-results.json')
+            ->locate($address)
+        ;
+    }
 
     /**
      *
