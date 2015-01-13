@@ -4,7 +4,7 @@ Nominatim API
 Doc
 ---
 
-Go to [www.bingmapsportal.com](http://wiki.openstreetmap.org/wiki/Nominatim).
+Go to [wiki.openstreetmap.org/wiki/Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim).
 
 Usage limit
 -----------
