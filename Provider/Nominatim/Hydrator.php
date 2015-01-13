@@ -25,9 +25,9 @@ class Hydrator extends BaseHydrator
      */
     public function populateAddress(AddressInterface $address, Array $data)
     {
-        return $address->setFullAddress(
-            $data['display_name']
-        );
+        $fullAddress = $this->constructAddress($data['address']);
+
+        return $address->setFullAddress($fullAddress);
     }
 
     /**
@@ -43,5 +43,17 @@ class Hydrator extends BaseHydrator
                 $data[0]['lon']
             )
         ;
+    }
+
+    protected function constructAddress($address)
+    {
+        $postcodes      =  explode(';', $address['postcode']);
+        $postcode       =  $postcodes[0];
+
+        $fullAddress    =  sprintf('%s %s, %s', $postcode, $address['city'], $address['country']);
+        $prefix         =  empty($address['road'])          ? '': $address['road'];
+        $prefix         .= empty($address['house_number'])  ? '': $address['house_number'];
+
+        return !empty($prefix)? ($prefix . ', ' . $fullAddress): $fullAddress;
     }
 }

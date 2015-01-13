@@ -79,7 +79,7 @@ class LocatorTest extends LocatorTestCase
     {
         $address = new Address();
         $address->setFullAddress(
-            'impasse fino bricka, 34000 montpellier'
+            'rue du thor, 34000 montpellier'
         );
 
         $this->setExpectedException('Exception');
@@ -107,7 +107,7 @@ class LocatorTest extends LocatorTestCase
         ;
 
         $this->assertEquals(
-            'Rue du Thor, Millénaire, Port Marianne, Montpellier, Hérault, Languedoc-Roussillon, France métropolitaine, 34000;34070;34080;34090, France',
+            'Rue du Thor, 34000 Montpellier, France',
             $address->getFullAddress()
         );
     }
