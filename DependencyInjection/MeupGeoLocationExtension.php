@@ -29,7 +29,7 @@ class MeupGeoLocationExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(
-            new Configuration(), 
+            new Configuration(),
             $configs
         );
 
@@ -72,12 +72,12 @@ class MeupGeoLocationExtension extends Extension
     protected function loadHandlers(array $config, ContainerBuilder $container)
     {
         $container->setDefinition(
-            'meup_geolocation.distance_calculator', 
+            'meup_geolocation.distance_calculator',
             new Definition($config['handlers']['distance_calculator'])
         );
 
         $container->setDefinition(
-            'meup_geolocation.locator', 
+            'meup_geolocation.locator',
             new Definition(
                 $config['handlers']['locator_manager'],
                 array(

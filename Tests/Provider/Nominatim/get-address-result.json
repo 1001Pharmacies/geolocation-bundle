@@ -1,0 +1,20 @@
+{
+   "place_id": "71823099",
+   "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http:\/\/www.openstreetmap.org\/copyright",
+   "osm_type": "way",
+   "osm_id": "48278716",
+   "lat": "43.6171194",
+   "lon": "3.9151111",
+   "display_name": "Rue du Thor, Millénaire, Port Marianne, Montpellier, Hérault, Languedoc-Roussillon, France métropolitaine, 34000;34070;34080;34090, France",
+   "address": {
+      "road": "Rue du Thor",
+      "neighbourhood": "Millénaire",
+      "suburb": "Port Marianne",
+      "city": "Montpellier",
+      "county": "Montpellier",
+      "state": "Languedoc-Roussillon",
+      "country": "France",
+      "postcode": "34000;34070;34080;34090",
+      "country_code": "fr"
+   }
+}

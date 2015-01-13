@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\GeoLocationBundle\Provider\Google;
+namespace Meup\Bundle\GeoLocationBundle\Provider\Nominatim;
 
 use Psr\Log\LoggerInterface;
 use Guzzle\Http\Client as HttpClient;
@@ -19,9 +19,9 @@ use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
 
 /**
- * Google's Geocoding API
+ * Nominatim's Locations API
  *
- * @link https://developers.google.com/maps/documentation/geocoding/
+ * @link http://wiki.openstreetmap.org/wiki/Nominatim
  */
 class Locator extends BaseLocator
 {
@@ -69,13 +69,13 @@ class Locator extends BaseLocator
      */
     protected function populate($type, $response)
     {
-        if ($response['status']!='OK') {
+        if (empty($response)) {
             throw new \Exception('No results found.');
         }
         return $this
             ->hydrator
             ->hydrate(
-                $response['results'],
+                $response,
                 $type
             )
         ;
@@ -92,10 +92,9 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%s?address=%s&key=%s',
+                        '%ssearch/%s?o=json',
                         $this->api_endpoint,
-                        $address->getFullAddress(),
-                        $this->api_key
+                        $address->getFullAddress()
                     )
                 )
                 ->send()
@@ -107,7 +106,7 @@ class Locator extends BaseLocator
             ->debug(
                 'Locate coordinates by address',
                 array(
-                    'provider'  => 'google',
+                    'provider'  => 'nominatim',
                     'address'   => $address->getFullAddress(),
                     'latitude'  => $coordinates->getLatitude(),
                     'longitude' => $coordinates->getLongitude(),
@@ -129,11 +128,10 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%s?latlng=%d,%d&key=%s',
+                        '%sreverse?format=json&lat=%d&lon=%d',
                         $this->api_endpoint,
                         $coordinates->getLatitude(),
-                        $coordinates->getLongitude(),
-                        $this->api_key
+                        $coordinates->getLongitude()
                     )
                 )
                 ->send()
@@ -145,7 +143,7 @@ class Locator extends BaseLocator
             ->debug(
                 'Locate address by coordinates',
                 array(
-                    'provider'  => 'google',
+                    'provider'  => 'nominatim',
                     'address'   => $address->getFullAddress(),
                     'latitude'  => $coordinates->getLatitude(),
                     'longitude' => $coordinates->getLongitude(),
