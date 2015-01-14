@@ -64,11 +64,11 @@ class DefaultController extends Controller
     {
         $query   = $this->get('request')->query;
         $service = $query->get('service');
-        $address = $this->get('meup_geolocation.address_factory')->create();
+        $address = $this->get('meup_geo_location.address_factory')->create();
         $coords  = null;
         $locator = $this->get(
             sprintf(
-                'meup_geolocation.%slocator',
+                'meup_geo_location.%slocator',
                 $service ? sprintf('_%', $service): null
             )
         );
