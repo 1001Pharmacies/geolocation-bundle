@@ -26,10 +26,10 @@ class LocatorCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $definition = $container->getDefinition(
-            'meup_geolocation.locator'
+            'meup_geo_location.locator'
         );
         $taggedServices = $container->findTaggedServiceIds(
-            'meup_geolocation.locator'
+            'meup_geo_location.locator'
         );
 
         foreach ($taggedServices as $id => $tags) {

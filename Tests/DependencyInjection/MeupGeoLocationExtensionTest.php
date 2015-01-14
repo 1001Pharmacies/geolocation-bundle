@@ -57,7 +57,7 @@ class MeupGeoLocationExtensionTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->extension = $this->getExtension();
-        $this->root      = "meup_geolocation";
+        $this->root      = "meup_geo_location";
     }
 
     /**
@@ -67,7 +67,7 @@ class MeupGeoLocationExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $this->extension->load(array(), $container = $this->getContainer());
 
-        $this->assertTrue($container->hasParameter('geolocation_google_api_key'));
-        $this->assertTrue($container->hasParameter('geolocation_bing_api_key'));
+        $this->assertTrue($container->hasParameter('geo_location_google_api_key'));
+        $this->assertTrue($container->hasParameter('geo_location_bing_api_key'));
     }
 }

@@ -24,13 +24,13 @@ Example
 
 ```php
 $address = $container
-    ->get('meup_geolocation.address_factory')
+    ->get('meup_geo_location.address_factory')
     ->create()
     ->setFullAddress('360 rue du thor, 34000 Montpellier')
 ;
 
 $coordinates = $container
-    ->get('meup_geolocation.locator')
+    ->get('meup_geo_location.locator')
     ->locate($address)
 ;
 
@@ -48,14 +48,14 @@ The `geolocation-bundle` only provides library ands services. But you can easily
 
 ```php
 $coordinates = $container
-    ->get('meup_geolocation.coordinates_factory')
+    ->get('meup_geo_location.coordinates_factory')
     ->create()
     ->setLatitude(43.6190815)
     ->setLongitude(3.9162419)
 ;
 
 $address = $container
-    ->get('meup_geolocation.locator')
+    ->get('meup_geo_location.locator')
     ->locate($coordinates)
 ;
 
@@ -69,7 +69,7 @@ When you found two location's coordinates you can also calculate their distance 
 
 ```php
 $factory = $container
-    ->get('meup_geolocation.coordinates_factory')
+    ->get('meup_geo_location.coordinates_factory')
 ;
 
 $paris = $factory
@@ -84,7 +84,7 @@ $lyon = $factory
 ;
 
 $distance_paris_lyon = $container
-    ->get('meup_geolocation.distance_calculator')
+    ->get('meup_geo_location.distance_calculator')
     ->getDistance($paris, $lyon)
 ;
 
@@ -122,8 +122,8 @@ Setup your `app/config/parameters.yml` with your api keys :
 ```yaml
 parameters:
     # ...
-    geolocation_google_api_key: your_google_api_key
-    geolocation_bing_api_key:   your_bing_api_key
+    geo_location_google_api_key: your_google_api_key
+    geo_location_bing_api_key:   your_bing_api_key
 ```
 
 See detailed [Google](Resources/doc/provider/google.md#create-an-api-key) and [Bing](Resources/doc/provider/bing.md#create-an-api-key) documentation to know how to retrieve api keys.

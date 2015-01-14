@@ -27,7 +27,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode    = $treeBuilder->root('meup_geolocation');
+        $rootNode    = $treeBuilder->root('meup_geo_location');
 
         $rootNode
             ->children()
@@ -62,7 +62,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('google')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('api_key')->defaultValue('%geolocation_google_api_key%')->cannotBeEmpty()->end()
+                                ->scalarNode('api_key')->defaultValue('%geo_location_google_api_key%')->cannotBeEmpty()->end()
                                 ->scalarNode('api_endpoint')->defaultValue('https://maps.googleapis.com/maps/api/geocode/json')->end()
                                 ->scalarNode('locator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Google\Locator')->end()
                                 ->scalarNode('hydrator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Google\Hydrator')->end()
@@ -71,7 +71,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('bing')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('api_key')->defaultValue('%geolocation_bing_api_key%')->cannotBeEmpty()->end()
+                                ->scalarNode('api_key')->defaultValue('%geo_location_bing_api_key%')->cannotBeEmpty()->end()
                                 ->scalarNode('api_endpoint')->defaultValue('http://dev.virtualearth.net/REST/v1/Locations/')->end()
                                 ->scalarNode('locator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Bing\Locator')->end()
                                 ->scalarNode('hydrator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Bing\Hydrator')->end()
@@ -80,7 +80,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('nominatim')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('api_key')->defaultValue('%geolocation_nominatim_api_key%')->end()
+                                ->scalarNode('api_key')->defaultValue('%geo_location_nominatim_api_key%')->end()
                                 ->scalarNode('api_endpoint')->defaultValue('http://nominatim.openstreetmap.org/')->end()
                                 ->scalarNode('locator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Nominatim\Locator')->end()
                                 ->scalarNode('hydrator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Nominatim\Hydrator')->end()

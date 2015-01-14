@@ -26,7 +26,7 @@ class LocateCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('meup_geolocation:locator:locate')
+            ->setName('meup_geo_location:locator:locate')
             ->setDescription('Get the weekly movies sessions program.')
         ;
     }
@@ -38,7 +38,7 @@ class LocateCommand extends ContainerAwareCommand
     {
         $this
             ->getContainer()
-            ->get('meup_geolocation.locator')
+            ->get('meup_geo_location.locator')
         ;
     }
 }
