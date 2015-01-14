@@ -39,8 +39,9 @@ The `app/config/parameters.yml` will contains your API keys :
 ```yaml
 parameters:
     # ...
-    geolocation_google_api_key: your_google_api_key
-    geolocation_bing_api_key:   your_bing_api_key
+    geolocation_google_api_key:     your_google_api_key
+    geolocation_bing_api_key:       your_bing_api_key
+    geolocation_mapquest_api_key:   your_mapquest_api_key
 ```
 
 you can configure your `app/config/config.yml` with the following
@@ -67,4 +68,9 @@ meup_geolocation:
             api_endpoint:    http://dev.virtualearth.net/REST/v1/Locations/
             locator_class:   Meup\Bundle\GeoLocationBundle\Provider\Bing\Locator
             hydrator_class:  Meup\Bundle\GeoLocationBundle\Provider\Bing\Hydrator
+        masquest:
+            api_key:         %geolocation_mapquest_api_key%
+            api_endpoint:    http://open.mapquestapi.com/geocoding/v1
+            locator_class:   Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Locator
+            hydrator_class:  Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Hydrator
 ```
