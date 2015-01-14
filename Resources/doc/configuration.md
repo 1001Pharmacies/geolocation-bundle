@@ -41,9 +41,9 @@ parameters:
     # ...
     geo_location_google_api_key:    your_google_api_key
     geo_location_bing_api_key:      your_bing_api_key
-    geo_location_nominatim_api_key: your_nominatim_api_key
+    geo_location_nominatim_api_key: null
     geo_location_mapquest_api_key:  your_mapquest_api_key
-    geo_location_yandex_api_key:    your_yandex_api_key
+    geo_location_yandex_api_key:    null
 ```
 
 you can configure your `app/config/config.yml` with the following
