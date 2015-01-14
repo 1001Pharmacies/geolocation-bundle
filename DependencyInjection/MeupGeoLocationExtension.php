@@ -50,7 +50,7 @@ class MeupGeoLocationExtension extends Extension
 
         foreach (array('address', 'coordinates') as $entity) {
             $result[] = $container->setDefinition(
-                sprintf('meup_geolocation.%s_factory', $entity),
+                sprintf('meup_geo_location.%s_factory', $entity),
                 new Definition(
                     $config[$entity]['factory_class'],
                     array(
@@ -72,12 +72,12 @@ class MeupGeoLocationExtension extends Extension
     protected function loadHandlers(array $config, ContainerBuilder $container)
     {
         $container->setDefinition(
-            'meup_geolocation.distance_calculator',
+            'meup_geo_location.distance_calculator',
             new Definition($config['handlers']['distance_calculator'])
         );
 
         $container->setDefinition(
-            'meup_geolocation.locator',
+            'meup_geo_location.locator',
             new Definition(
                 $config['handlers']['locator_manager'],
                 array(
@@ -96,7 +96,7 @@ class MeupGeoLocationExtension extends Extension
     protected function loadProviders(array $config, ContainerBuilder $container, $model)
     {
         $http_client = $container->setDefinition(
-            'meup_geolocation.http_client',
+            'meup_geo_location.http_client',
             new Definition(
                 'Guzzle\Http\Client'
             )
@@ -129,12 +129,12 @@ class MeupGeoLocationExtension extends Extension
     protected function loadProvider(ContainerBuilder $container, $name, array $params, Definition $http_client, array $factories)
     {
         $container->setParameter(
-            sprintf('geolocation_%s_api_key', $name),
+            sprintf('geo_location_%s_api_key', $name),
             'null'
         );
 
         $hydrator = $container->setDefinition(
-            sprintf('meup_geolocation.%s_hydrator', $name),
+            sprintf('meup_geo_location.%s_hydrator', $name),
             new Definition(
                 $params['hydrator_class'],
                 $factories
@@ -152,10 +152,10 @@ class MeupGeoLocationExtension extends Extension
             )
         );
 
-        $definition->addTag('meup_geolocation.locator');
+        $definition->addTag('meup_geo_location.locator');
 
         $container->setDefinition(
-            sprintf('meup_geolocation.%s_locator', $name),
+            sprintf('meup_geo_location.%s_locator', $name),
             $definition
         );
 

@@ -28,6 +28,7 @@ First, you have to design a tiny html form :
         <option{% if service == ''%} selected{% endif %}>Random</option>
         <option value="google"{% if service == 'google'%} selected{% endif %}>Google</option>
         <option value="bing"{% if service == 'bing'%} selected{% endif %}>Bing</option>
+        <option value="nominatim"{% if service == 'nominatim'%} selected{% endif %}>Nominatim</option>
       </select>
     </p>
     <p>
@@ -63,11 +64,11 @@ class DefaultController extends Controller
     {
         $query   = $this->get('request')->query;
         $service = $query->get('service');
-        $address = $this->get('meup_geolocation.address_factory')->create();
+        $address = $this->get('meup_geo_location.address_factory')->create();
         $coords  = null;
         $locator = $this->get(
             sprintf(
-                'meup_geolocation.%slocator',
+                'meup_geo_location.%slocator',
                 $service ? sprintf('_%', $service): null
             )
         );

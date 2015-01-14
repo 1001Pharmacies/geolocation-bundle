@@ -58,7 +58,7 @@ class LocatorCompilerPassTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->extension = $this->getExtension();
-        $this->root      = "meup_geolocation";
+        $this->root      = "meup_geo_location";
     }
 
     /**

@@ -5,11 +5,11 @@ create your own locator provider :
 
 ```yaml
     # services.yml
-    meup_geolocation.example_locator:
+    meup_geo_location.example_locator:
         class: Acme\GeoCoding\Locator
         arguments: # ...
         tags:
-            - { name: meup_geolocation.locator }
+            - { name: meup_geo_location.locator }
 ```
 
 ```php
