@@ -1,0 +1,17 @@
+{
+   "response":{
+      "Attribution":"",
+      "GeoObjectCollection":{
+         "metaDataProperty":{
+            "GeocoderResponseMetaData":{
+               "request":"250 rue de Thortank",
+               "found":"0",
+               "results":"1"
+            }
+         },
+         "featureMember":[
+
+         ]
+      }
+   }
+}

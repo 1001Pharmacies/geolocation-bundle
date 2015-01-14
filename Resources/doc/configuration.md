@@ -41,9 +41,9 @@ parameters:
     # ...
     geo_location_google_api_key:    your_google_api_key
     geo_location_bing_api_key:      your_bing_api_key
-    geo_location_nominatim_api_key: null
-    geo_location_mapquest_api_key:  null
-
+    geo_location_nominatim_api_key: your_nominatim_api_key
+    geo_location_mapquest_api_key:  your_mapquest_api_key
+    geo_location_yandex_api_key:    your_yandex_api_key
 ```
 
 you can configure your `app/config/config.yml` with the following
@@ -80,4 +80,10 @@ meup_geo_location:
             api_endpoint:    http://open.mapquestapi.com/geocoding/v1
             locator_class:   Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Locator
             hydrator_class:  Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Hydrator
+        yandex:
+            api_key:         %geo_location_yandex_api_key%
+            api_endpoint:    http://geocode-maps.yandex.ru/1.x/
+            locator_class:   Meup\Bundle\GeoLocationBundle\Provider\Yandex\Locator
+            hydrator_class:  Meup\Bundle\GeoLocationBundle\Provider\Yandex\Hydrator
+            
 ```

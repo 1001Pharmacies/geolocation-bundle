@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Meup\Bundle\GeoLocationBundle\Tests\Provider\Mapquest;
+namespace Meup\Bundle\GeoLocationBundle\Tests\Provider\Yandex;
 
 use Meup\Bundle\GeoLocationBundle\Model\Address;
 use Meup\Bundle\GeoLocationBundle\Model\Coordinates;
 use Meup\Bundle\GeoLocationBundle\Factory\AddressFactory;
 use Meup\Bundle\GeoLocationBundle\Factory\CoordinatesFactory;
-use Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Locator as MapquestLocator;
-use Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Hydrator as MapquestHydrator;
+use Meup\Bundle\GeoLocationBundle\Provider\Yandex\Locator as YandexLocator;
+use Meup\Bundle\GeoLocationBundle\Provider\Yandex\Hydrator as YandexHydrator;
 use Meup\Bundle\GeoLocationBundle\Tests\Provider\LocatorTestCase;
 
 /**
@@ -27,7 +27,7 @@ class LocatorTest extends LocatorTestCase
     /**
      * @param string $result_filename
      *
-     * @return MapquestLocator
+     * @return YandexLocator
      */
     public function getLocator($result_filename)
     {
@@ -36,14 +36,14 @@ class LocatorTest extends LocatorTestCase
             ->getMockForAbstractClass()
         ;
 
-        return new MapquestLocator(
-            new MapquestHydrator(
+        return new YandexLocator(
+            new YandexHydrator(
                 new AddressFactory('Meup\Bundle\GeoLocationBundle\Model\Address'),
                 new CoordinatesFactory('Meup\Bundle\GeoLocationBundle\Model\Coordinates')
             ),
             $this->getClient($result_filename, __DIR__),
             $logger,
-            uniqid(), // api_keygit
+            uniqid(), // api_key
             'http://open.mapquestapi.com/geocoding/v1' // endpoint
         );
     }
@@ -64,7 +64,7 @@ class LocatorTest extends LocatorTestCase
         ;
 
         $this->assertEquals(
-            array(43.617119, 3.915111),
+            array(43.617539, 3.915586),
             array(
                 $coordinates->getLatitude(),
                 $coordinates->getLongitude()
@@ -79,7 +79,7 @@ class LocatorTest extends LocatorTestCase
     {
         $address = new Address();
         $address->setFullAddress(
-            '250 rue du Thor, 34000 Montpellier'
+            '250 rue de Thortank'
         );
 
         $this->setExpectedException('Exception');
@@ -97,8 +97,8 @@ class LocatorTest extends LocatorTestCase
     {
         $coordinates = new Coordinates();
         $coordinates
-            ->setLatitude(43.6190815)
-            ->setLongitude(3.9162419)
+            ->setLatitude(43.617545)
+            ->setLongitude(3.915586)
         ;
 
         $address = $this
@@ -107,7 +107,7 @@ class LocatorTest extends LocatorTestCase
         ;
 
         $this->assertEquals(
-            'Rue du Thor, 34000 Montpellier, FR',
+            'Rue de Thor, Montpellier, Hérault, Languedoc-Roussillon, France',
             $address->getFullAddress()
         );
     }

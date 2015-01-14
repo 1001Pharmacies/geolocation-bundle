@@ -1,0 +1,60 @@
+{
+    "response":{
+        "Attribution":"",
+        "GeoObjectCollection":{
+            "metaDataProperty":{
+                "GeocoderResponseMetaData":{
+                    "request":"3.915586,43.617545",
+                    "found":"6",
+                    "results":"1",
+                    "Point":{
+                        "pos":"3.915586 43.617545"
+                    }
+                }
+            },
+            "featureMember":[
+                {
+                    "GeoObject":{
+                        "metaDataProperty":{
+                            "GeocoderMetaData":{
+                                "kind":"street",
+                                "text":"France, Languedoc-Roussillon, Hérault, Montpellier, Rue de Thor",
+                                "precision":"street",
+                                "AddressDetails":{
+                                    "Country":{
+                                        "AddressLine":"Languedoc-Roussillon, Hérault, Montpellier, Rue de Thor",
+                                        "CountryNameCode":"FR",
+                                        "CountryName":"France",
+                                        "AdministrativeArea":{
+                                            "AdministrativeAreaName":"Languedoc-Roussillon",
+                                            "SubAdministrativeArea":{
+                                                "SubAdministrativeAreaName":"Hérault",
+                                                "Locality":{
+                                                    "LocalityName":"Montpellier",
+                                                    "Thoroughfare":{
+                                                        "ThoroughfareName":"Rue de Thor"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description":"Montpellier, Hérault, Languedoc-Roussillon, France",
+                        "name":"Rue de Thor",
+                        "boundedBy":{
+                            "Envelope":{
+                                "lowerCorner":"3.914202 43.616606",
+                                "upperCorner":"3.916259 43.619079"
+                            }
+                        },
+                        "Point":{
+                            "pos":"3.915586 43.617539"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
