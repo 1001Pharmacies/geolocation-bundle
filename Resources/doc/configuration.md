@@ -73,7 +73,7 @@ meup_geo_location:
             api_endpoint:    http://nominatim.openstreetmap.org/
             locator_class:   Meup\Bundle\GeoLocationBundle\Provider\Nominatim\Locator
             hydrator_class:  Meup\Bundle\GeoLocationBundle\Provider\Nominatim\Hydrator
-        masquest:
+        mapquest:
             api_key:         %geo_location_mapquest_api_key%
             api_endpoint:    http://open.mapquestapi.com/geocoding/v1
             locator_class:   Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Locator
