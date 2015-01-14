@@ -43,7 +43,7 @@ class LocatorTest extends LocatorTestCase
             ),
             $this->getClient($result_filename, __DIR__),
             $logger,
-            uniqid(), // api_keygit
+            uniqid(), // api_key
             'http://open.mapquestapi.com/geocoding/v1' // endpoint
         );
     }
