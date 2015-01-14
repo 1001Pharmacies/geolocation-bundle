@@ -89,7 +89,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('mapquest')
                             ->addDefaultsIfNotSet()
                                 ->children()
-                                    ->scalarNode('api_key')->defaultValue('%geolocation_mapquest_api_key%')->end()
+                                    ->scalarNode('api_key')->defaultValue('%geo_location_mapquest_api_key%')->end()
                                     ->scalarNode('api_endpoint')->defaultValue('http://open.mapquestapi.com/geocoding/v1')->end()
                                     ->scalarNode('locator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Locator')->end()
                                     ->scalarNode('hydrator_class')->defaultValue('Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Hydrator')->end()
