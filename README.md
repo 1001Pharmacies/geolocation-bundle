@@ -12,6 +12,7 @@ The following services are included to this bundle :
 *  [Google](Resources/doc/provider/google.md)
 *  [Bing](Resources/doc/provider/bing.md)
 *  [Nominatim](Resources/doc/provider/nominatim.md)
+*  [MapQuest](Resources/doc/provider/mapquest.md)
 
 The the complete documentation to [add you own provider](Resources/doc/custom-provider.md).
 

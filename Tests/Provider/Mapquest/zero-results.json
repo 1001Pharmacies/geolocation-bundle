@@ -1,0 +1,28 @@
+{
+   "results":[
+      {
+         "locations":[
+
+         ],
+         "providedLocation":{
+            "location":"rue inconnue, Montpellier"
+         }
+      }
+   ],
+   "options":{
+      "ignoreLatLngInput":false,
+      "maxResults":-1,
+      "thumbMaps":true
+   },
+   "info":{
+      "copyright":{
+         "text":"© 2014 MapQuest, Inc.",
+         "imageUrl":"http://api.mqcdn.com/res/mqlogo.gif",
+         "imageAltText":"© 2014 MapQuest, Inc."
+      },
+      "statuscode":0,
+      "messages":[
+
+      ]
+   }
+}

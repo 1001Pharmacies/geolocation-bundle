@@ -1,0 +1,54 @@
+{
+    "results":[
+        {
+            "locations":[
+                {
+                    "latLng":{
+                        "lng":3.915111,
+                        "lat":43.617119
+                    },
+                    "adminArea4":"Montpellier",
+                    "adminArea5Type":"City",
+                    "adminArea4Type":"County",
+                    "adminArea5":"Montpellier",
+                    "street":"Rue du Thor",
+                    "adminArea1":"FR",
+                    "adminArea3":"Languedoc-Roussillon",
+                    "type":"s",
+                    "displayLatLng":{
+                        "lng":3.915111,
+                        "lat":43.617119
+                    },
+                    "linkId":0,
+                    "postalCode":"34000;34070;34080;34090",
+                    "sideOfStreet":"N",
+                    "dragPoint":false,
+                    "adminArea1Type":"Country",
+                    "geocodeQuality":"STREET",
+                    "geocodeQualityCode":"B2XXX",
+                    "mapUrl":"http://open.mapquestapi.com/staticmap/v4/getmap?key=Fmjtd|luu829ur2d,a2=o5-9w1gla&type=map&size=225,160&pois=purple-1,43.6171194,3.9151111,0,0|&center=43.6171194,3.9151111&zoom=15&rand=236263063",
+                    "adminArea3Type":"State"
+                }
+            ],
+            "providedLocation":{
+                "location":"rue du Thor, 34000 Montpellier"
+            }
+        }
+    ],
+    "options":{
+        "ignoreLatLngInput":false,
+        "maxResults":-1,
+        "thumbMaps":true
+    },
+    "info":{
+        "copyright":{
+            "text":"© 2014 MapQuest, Inc.",
+            "imageUrl":"http://api.mqcdn.com/res/mqlogo.gif",
+            "imageAltText":"© 2014 MapQuest, Inc."
+        },
+        "statuscode":0,
+        "messages":[
+
+        ]
+    }
+}
