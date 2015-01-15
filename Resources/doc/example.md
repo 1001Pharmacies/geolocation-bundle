@@ -30,6 +30,7 @@ First, you have to design a tiny html form :
         <option value="bing"{% if service == 'bing'%} selected{% endif %}>Bing</option>
         <option value="nominatim"{% if service == 'nominatim'%} selected{% endif %}>Nominatim</option>
         <option value="mapquest"{% if service == 'mapquest'%} selected{% endif %}>MapQuest</option>
+        <option value="yandex"{% if service == 'yandex'%} selected{% endif %}>Yandex</option>
       </select>
     </p>
     <p>
