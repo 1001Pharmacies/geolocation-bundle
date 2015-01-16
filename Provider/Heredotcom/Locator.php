@@ -158,7 +158,7 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%s?prox=%d,%d&mode=retrieveAll&app_id=%s&app_code=%s&gen=8maxresults=1',
+                        '%s?prox=%d,%d&mode=retrieveAddresses&app_id=%s&app_code=%s&gen=8maxresults=1',
                         $this->api_reverse_endpoint,
                         $coordinates->getLatitude(),
                         $coordinates->getLongitude(),
