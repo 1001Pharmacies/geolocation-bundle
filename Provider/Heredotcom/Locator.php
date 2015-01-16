@@ -136,7 +136,7 @@ class Locator extends BaseLocator
             ->debug(
                 'Locate coordinates by address',
                 array(
-                    'provider'  => 'mapquest',
+                    'provider'  => 'heredotcom',
                     'address'   => $address->getFullAddress(),
                     'latitude'  => $coordinates->getLatitude(),
                     'longitude' => $coordinates->getLongitude(),
@@ -175,7 +175,7 @@ class Locator extends BaseLocator
             ->debug(
                 'Locate address by coordinates',
                 array(
-                    'provider'  => 'mapquest',
+                    'provider'  => 'heredotcom',
                     'address'   => $address->getFullAddress(),
                     'latitude'  => $coordinates->getLatitude(),
                     'longitude' => $coordinates->getLongitude(),
