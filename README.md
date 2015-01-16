@@ -14,6 +14,7 @@ The following services are included to this bundle :
 *  [Nominatim](Resources/doc/provider/nominatim.md)
 *  [MapQuest](Resources/doc/provider/mapquest.md)
 *  [Yandex](Resources/doc/provider/yandex.md)
+*  [Here.com](Resources/doc/provider/heredotcom.md)
 
 The the complete documentation to [add you own provider](Resources/doc/custom-provider.md).
 
@@ -124,11 +125,12 @@ Setup your `app/config/parameters.yml` with your api keys :
 ```yaml
 parameters:
     # ...
-    geo_location_google_api_key: your_google_api_key
-    geo_location_bing_api_key:   your_bing_api_key
-    geo_location_nominatim_api_key:   null
+    geo_location_google_api_key:     your_google_api_key
+    geo_location_bing_api_key:       your_bing_api_key
+    geo_location_nominatim_api_key:  null
     geo_location_mapquest_api_key:   your_mapquest_api_key
-    geo_location_yandex_api_key:   null
+    geo_location_yandex_api_key:     null
+    geo_location_heredotcom_api_key: your_heredotcom_api_key
 ```
 
 See detailed [Google](Resources/doc/provider/google.md#create-an-api-key) and [Bing](Resources/doc/provider/bing.md#create-an-api-key) documentation to know how to retrieve api keys.
