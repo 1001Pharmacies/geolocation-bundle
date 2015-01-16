@@ -43,6 +43,7 @@ parameters:
     geo_location_bing_api_key:      your_bing_api_key
     geo_location_nominatim_api_key: null
     geo_location_mapquest_api_key:  null
+    geo_location_heredotcom_api_key:  your_heredotcom_api_key
 
 ```
 
@@ -80,4 +81,9 @@ meup_geo_location:
             api_endpoint:    http://open.mapquestapi.com/geocoding/v1
             locator_class:   Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Locator
             hydrator_class:  Meup\Bundle\GeoLocationBundle\Provider\Mapquest\Hydrator
+        heredotcom:
+            api_key:         %your_heredotcom_api_key%
+            api_endpoint:    http://geocoder.cit.api.here.com/6.2/geocode.json;http://reverse.geocoder.cit.api.here.com/6.2/reversegeocode.json
+            locator_class:   Meup\Bundle\GeoLocationBundle\Provider\Heredotcom\Locator
+            hydrator_class:  Meup\Bundle\GeoLocationBundle\Provider\Heredotcom\Hydrator
 ```
