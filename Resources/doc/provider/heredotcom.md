@@ -8,7 +8,14 @@ Go to [https://developer.here.com/rest-apis/documentation/geocoder/](https://dev
 
 Api Key must be composed of your AppId and AppCode separated with semicolon.
 
-EndPoint must be composed of GeoCode Endpoint and Reverse GeoCode Endpoint separated with semicolon.
+EndPoint must be composed of GeoCode Endpoint and Reverse GeoCode Endpoint separated with semicolon :
+
+```yaml
+parameters:
+    # ...
+    api_key: {your App Id};{your App Code}
+    endpoint: http://{GeoCode Endpoint (ex: http://geocode/api/)};{GeoCode Reverse Endpoint (ex: http://reverse.geocode/api)}
+```
 
 Usage limit
 -----------
