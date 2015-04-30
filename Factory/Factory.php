@@ -45,11 +45,4 @@ abstract class Factory implements FactoryInterface
     {
         return $this->class->newInstanceArgs($args);
     }
-
-    /**
-     * Interface to implements
-     *
-     * @return string
-     */
-    // abstract protected function getInterface();
 }
