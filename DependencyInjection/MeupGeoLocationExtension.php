@@ -34,6 +34,7 @@ class MeupGeoLocationExtension extends Extension
         );
 
         $factories = $this->loadFactories($config, $container);
+        $this->loadBalancer($config, $container);
         $this->loadHandlers($config, $container);
         $this->loadProviders($config, $container, $factories);
     }
@@ -64,6 +65,41 @@ class MeupGeoLocationExtension extends Extension
     }
 
     /**
+     * Load balancer service
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    protected function loadBalancer(array $config, ContainerBuilder $container)
+    {
+        $container->register(
+            'meup_geo_location.balancer.random_strategy',
+            'Meup\Bundle\GeoLocationBundle\Domain\BalancingStrategy\RandomStrategy'
+        );
+
+        $container->setAlias(
+            'meup_geo_location.balancer.strategy',
+            $config['balancer']['strategy']
+        );
+
+        $container
+            ->register(
+                'meup_geo_location.balancer_factory.default',
+                'Meup\Bundle\GeoLocationBundle\Domain\BalancerFactory'
+            )
+            ->addArgument(
+                'Meup\Bundle\GeoLocationBundle\Domain\Balancer',
+                new Reference('meup_geo_location.balancer.strategy')
+            )
+        ;
+
+        $container->setAlias(
+            'meup_geo_location.balancer_factory',
+            $config['balancer']['factory']
+        );
+    }
+
+    /**
      * @param array $config
      * @param ContainerBuilder $container
      *
@@ -81,6 +117,7 @@ class MeupGeoLocationExtension extends Extension
             new Definition(
                 $config['handlers']['locator_manager'],
                 array(
+                    new Reference('meup_geo_location.balancer_factory'),
                     new Reference('logger'),
                 )
             )

@@ -140,4 +140,5 @@ See detailed [Google](Resources/doc/provider/google.md#create-an-api-key) and [B
 *  [Model](Resources/doc/custom-model.md)
 *  [Hydratation](Resources/doc/custom-hydrator.md)
 *  [Provider](Resources/doc/custom-provider.md)
+*  [Provider balancer](Resources/doc/custom-balancer.md)
 *  [Configuration](Resources/doc/configuration.md)

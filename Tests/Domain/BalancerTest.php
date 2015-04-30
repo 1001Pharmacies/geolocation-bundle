@@ -86,4 +86,20 @@ class BalancerTest extends \PHPUnit_Framework_TestCase
             $balancer->next()
         );
     }
+
+    public function testNextThrowsExceptionIfNoLocatorRemaining()
+    {
+        $balancer = new Balancer(
+            self::$locators,
+            $this->createStrategy(self::$locators)
+        );
+
+        for ($i = 0; $i < count(self::$locators); $i++) {
+            $balancer->next();
+        }
+
+        $this->setExpectedException('\OutOfRangeException');
+
+        $balancer->next();
+    }
 }

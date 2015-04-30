@@ -72,6 +72,7 @@ class Locator extends BaseLocator
         if ($response['status']!='OK') {
             throw new \Exception('No results found.');
         }
+
         return $this
             ->hydrator
             ->hydrate(

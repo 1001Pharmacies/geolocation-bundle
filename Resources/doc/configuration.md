@@ -61,6 +61,9 @@ meup_geo_location:
     handlers:
         distance_calculator: Meup\Bundle\GeoLocationBundle\Handler\DistanceCalculator
         locator_manager:     Meup\Bundle\GeoLocationBundle\Handler\LocatorManager
+    balancer:
+        strategy:            meup_geo_location.balancer.random_strategy
+        factory:             meup_geo_location.balancer_factory.default
     providers:
         google:
             api_key:         %geo_location_google_api_key%

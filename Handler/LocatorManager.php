@@ -11,21 +11,39 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Handler;
 
-use Meup\Bundle\GeoLocationBundle\Model\LocationInterface;
+use Meup\Bundle\GeoLocationBundle\Domain\BalancerFactoryInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
 use Meup\Bundle\GeoLocationBundle\Model\CoordinatesInterface;
+use Meup\Bundle\GeoLocationBundle\Model\LocationInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  *
  */
 class LocatorManager implements LocatorManagerInterface
 {
+    /**
+     * @var BalancerFactoryInterface
+     */
+    protected $balancerFactory;
+
+    /**
+     * @var LoggerInterface
+     */
     protected $logger = null;
 
     /**
      * @var Array
      */
     protected $locators = array();
+
+    public function __construct(
+        BalancerFactoryInterface $balancerFactory,
+        LoggerInterface $logger = null
+    ) {
+        $this->balancerFactory = $balancerFactory;
+        $this->logger          = $logger;
+    }
 
     /**
      * {@inheritDoc}
@@ -38,7 +56,7 @@ class LocatorManager implements LocatorManagerInterface
     /**
      * {@inheritDoc}
      */
-    public function addLocator(LocatorInterface $locator, Array $attributes = array())
+    public function addLocator(LocatorInterface $locator, array $attributes = array())
     {
         $this->locators[] = $locator;
 
@@ -50,12 +68,34 @@ class LocatorManager implements LocatorManagerInterface
      */
     public function locate(LocationInterface $location)
     {
-        $key     = rand(0, count($this->locators) - 1);
-        $locator = $this->locators[$key];
-
-        $result  = $locator->locate($location);
+        $result = $this->tryLocate($location);
 
         $this->log($location, $result);
+
+        return $result;
+    }
+
+    private function tryLocate(LocationInterface $location)
+    {
+        $balancer = $this
+            ->balancerFactory
+            ->create($this->locators)
+        ;
+
+        $result = null;
+
+        try {
+            while(!$result) {
+                $locator = $balancer->next();
+                try {
+                    $result = $locator->locate($location);
+                } catch (\Exception $e) {
+
+                }
+            }
+        } catch (\OutOfRangeException $e) {
+
+        }
 
         return $result;
     }

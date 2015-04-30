@@ -40,6 +40,10 @@ class Balancer implements BalancerInterface
     public function next()
     {
         $next = current($this->locators);
+        if (false === $next) {
+            throw new \OutOfRangeException();
+        }
+
         next($this->locators);
 
         return $next;
