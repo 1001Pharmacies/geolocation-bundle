@@ -50,10 +50,18 @@ class LocatorManager implements LocatorManagerInterface
      */
     public function locate(LocationInterface $location)
     {
-        $key     = rand(0, count($this->locators)-1);
+        $key     = rand(0, count($this->locators) - 1);
         $locator = $this->locators[$key];
+
         $result  = $locator->locate($location);
 
+        $this->log($location, $result);
+
+        return $result;
+    }
+
+    private function log($location, $result)
+    {
         if ($this->logger) {
             if ($location instanceof AddressInterface) {
                 $this
@@ -83,7 +91,5 @@ class LocatorManager implements LocatorManagerInterface
                 ;
             }
         }
-
-        return $result;
     }
 }
