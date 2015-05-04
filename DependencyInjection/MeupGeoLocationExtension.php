@@ -88,7 +88,9 @@ class MeupGeoLocationExtension extends Extension
                 'Meup\Bundle\GeoLocationBundle\Domain\BalancerFactory'
             )
             ->addArgument(
-                'Meup\Bundle\GeoLocationBundle\Domain\Balancer',
+                'Meup\Bundle\GeoLocationBundle\Domain\Balancer'
+            )
+            ->addArgument(
                 new Reference('meup_geo_location.balancer.strategy')
             )
         ;

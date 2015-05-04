@@ -52,9 +52,11 @@ class BalancerFactory implements BalancerFactoryInterface
      */
     public function create(array $locators)
     {
-        return $this->class->newInstance(
-            $locators,
-            $this->strategy
+        return $this->class->newInstanceArgs(
+            array(
+                $locators,
+                $this->strategy,
+            )
         );
     }
 }
