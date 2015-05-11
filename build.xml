@@ -3,7 +3,7 @@
 
     <target name="help">
         <echo>help     Shows this help</echo>
-        <echo>tests    Run tests</echo>
+        <echo>test     Run tests</echo>
         <echo>phpcs    Detects standard violations on the code.</echo>
         <echo>phpcpd   Detects duplicate code portions.</echo>
         <echo>phpunit  Executes phpunit tests</echo>

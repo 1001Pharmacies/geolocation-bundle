@@ -41,7 +41,7 @@ abstract class Factory implements FactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function create(Array $args = array())
+    public function create(array $args = array())
     {
         return $this->class->newInstanceArgs($args);
     }

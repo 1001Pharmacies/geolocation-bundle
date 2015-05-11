@@ -17,15 +17,15 @@ namespace Meup\Bundle\GeoLocationBundle\Handler;
 interface LocatorManagerInterface extends LocatorServiceInterface
 {
     /**
-     * @return Array<LocatorInterface>
+     * @return array<LocatorInterface>
      */
     public function getLocators();
 
     /**
      * @param LocatorInterface $locator
-     * @param Array $attributes
+     * @param array $attributes
      *
      * @return self
      */
-    public function addLocator(LocatorInterface $locator, Array $attributes = array());
+    public function addLocator(LocatorInterface $locator, array $attributes = array());
 }

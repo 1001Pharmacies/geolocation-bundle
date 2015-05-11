@@ -9,17 +9,21 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\GeoLocationBundle\Factory;
+namespace Meup\Bundle\GeoLocationBundle\Domain;
 
 /**
+ * Interface for Balancer factory
  *
+ * @author Gilles <gilles@1001pharmacies.com>
  */
-interface FactoryInterface
+interface BalancerFactoryInterface
 {
     /**
-     * @param Array $args
+     * Create balancer
      *
-     * @return Meup\Bundle\GeoLocationBundle\Model\LocationInterface
+     * @param array $locators
+     *
+     * @return BalancerInterface
      */
-    public function create(array $args = array());
+    public function create(array $locators);
 }
