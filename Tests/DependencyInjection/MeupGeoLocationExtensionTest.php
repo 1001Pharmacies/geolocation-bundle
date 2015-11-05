@@ -70,4 +70,22 @@ class MeupGeoLocationExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($container->hasParameter('geo_location_google_api_key'));
         $this->assertTrue($container->hasParameter('geo_location_bing_api_key'));
     }
+
+    public function testActivatedParam()
+    {
+        $config = array(
+            'meup_geo_location' => array(
+                'providers'     => array(
+                    'google'    => array(
+                        'activated' => false
+                    )
+                )
+            ),
+        );
+
+        $this->extension->load($config, $container = $this->getContainer());
+
+        $this->assertFalse($container->hasParameter('geo_location_google_api_key'));
+        $this->assertFalse($container->has('meup_geo_location.google_locator'));
+    }
 }

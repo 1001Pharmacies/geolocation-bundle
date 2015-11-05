@@ -144,13 +144,15 @@ class MeupGeoLocationExtension extends Extension
         $result = array();
 
         foreach ($config['providers'] as $name => $params) {
-            $result[] = $this->loadProvider(
-                $container,
-                $name,
-                $params,
-                $http_client,
-                $model
-            );
+            if ($params['activated']) {
+                $result[] = $this->loadProvider(
+                    $container,
+                    $name,
+                    $params,
+                    $http_client,
+                    $model
+                );
+            }
         }
 
         return $result;
