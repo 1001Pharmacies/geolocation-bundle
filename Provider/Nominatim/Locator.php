@@ -128,7 +128,7 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%sreverse?format=json&lat=%d&lon=%d',
+                        '%sreverse?format=json&lat=%s&lon=%s',
                         $this->api_endpoint,
                         $coordinates->getLatitude(),
                         $coordinates->getLongitude()

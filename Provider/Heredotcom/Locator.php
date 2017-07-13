@@ -79,8 +79,8 @@ class Locator extends BaseLocator
         if(count($api_endpoints) != 2) {
             throw new \Exception('Bad Api EndPoints, see doc.');
         }
-        $this->api_endpoint = $api_endpoint[0];
-        $this->api_reverse_endpoint = $api_endpoint[1];
+        $this->api_endpoint = $api_endpoints[0];
+        $this->api_reverse_endpoint = $api_endpoints[1];
     }
 
     /**
@@ -158,7 +158,7 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%s?prox=%d,%d&mode=retrieveAddresses&app_id=%s&app_code=%s&gen=8maxresults=1',
+                        '%s?prox=%s,%s&mode=retrieveAddresses&app_id=%s&app_code=%s&gen=8&maxresults=1',
                         $this->api_reverse_endpoint,
                         $coordinates->getLatitude(),
                         $coordinates->getLongitude(),

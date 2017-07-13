@@ -129,7 +129,7 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%s/?geocode=%d,%d&lang=en-US&format=json&results=1',
+                        '%s/?geocode=%s,%s&lang=en-US&format=json&results=1',
                         $this->api_endpoint,
                         $coordinates->getLatitude(),
                         $coordinates->getLongitude()
