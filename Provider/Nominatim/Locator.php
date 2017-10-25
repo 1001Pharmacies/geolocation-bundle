@@ -12,7 +12,7 @@
 namespace Meup\Bundle\GeoLocationBundle\Provider\Nominatim;
 
 use Psr\Log\LoggerInterface;
-use Guzzle\Http\Client as HttpClient;
+use GuzzleHttp\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
@@ -69,6 +69,7 @@ class Locator extends BaseLocator
      */
     protected function populate($type, $response)
     {
+        $response = json_decode($response->getBody(), true);
         if (empty($response)) {
             throw new \Exception('No results found.');
         }
@@ -97,8 +98,6 @@ class Locator extends BaseLocator
                         $address->getFullAddress()
                     )
                 )
-                ->send()
-                ->json()
         );
 
         $this
@@ -128,14 +127,12 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%sreverse?format=json&lat=%s&lon=%s',
+                        '%sreverse?format=json&lat=%F&lon=%F',
                         $this->api_endpoint,
                         $coordinates->getLatitude(),
                         $coordinates->getLongitude()
                     )
                 )
-                ->send()
-                ->json()
         );
 
         $this

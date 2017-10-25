@@ -17,7 +17,7 @@
     "require": {
         "php":         ">=5.3.3",
         "ext-curl":    "*",
-        "guzzle/http": "~3.9"
+        "guzzlehttp/guzzle":    "6.*"
     },
     "require-dev": {
         "symfony/symfony":           "2.3.*",

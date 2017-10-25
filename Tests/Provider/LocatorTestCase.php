@@ -11,6 +11,11 @@
 
 namespace Meup\Bundle\GeoLocationBundle\Tests\Provider;
 
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Client as HttpClient;
+
 /**
  *
  */
@@ -21,44 +26,18 @@ class LocatorTestCase extends \PHPUnit_Framework_TestCase
      */
     public function getClient($filename, $path = __DIR__)
     {
-        $response = $this
-            ->getMockBuilder('Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-        $response
-            ->method('json')
-            ->willReturn(
-                json_decode(
-                    file_get_contents(
-                        $path.
-                        DIRECTORY_SEPARATOR.
-                        $filename
-                    ),
-                    true
-                )
-            )
-        ;
+        $mock = new MockHandler([
+            new Response(200, [],
+                file_get_contents(
+                    $path.
+                    DIRECTORY_SEPARATOR.
+                    $filename
+                ))
+        ]);
 
-        $request = $this
-            ->getMockBuilder('Guzzle\Http\Message\Request')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-        $request
-            ->method('send')
-            ->willReturn($response)
-        ;
+        $handler = HandlerStack::create($mock);
 
-        $client = $this
-            ->getMockBuilder('Guzzle\Http\Client')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-        $client
-            ->method('get')
-            ->willReturn($request)
-        ;
+        $client = new HttpClient(['handler' => $handler]);
 
         return $client;
     }
