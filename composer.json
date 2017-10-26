@@ -22,7 +22,7 @@
     "require-dev": {
         "symfony/symfony":           "2.3.*",
         "phpunit/phpunit":           "4.*",
-        "squizlabs/php_codesniffer": "1.*",
+        "squizlabs/php_codesniffer": "2.*",
         "sebastian/phpcpd":          "2.*",
         "phing/phing":               "~2.9",
         "sami/sami":                 "2.0.*"
