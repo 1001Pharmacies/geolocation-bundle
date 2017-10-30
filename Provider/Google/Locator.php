@@ -12,7 +12,7 @@
 namespace Meup\Bundle\GeoLocationBundle\Provider\Google;
 
 use Psr\Log\LoggerInterface;
-use Guzzle\Http\Client as HttpClient;
+use GuzzleHttp\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
@@ -69,14 +69,15 @@ class Locator extends BaseLocator
      */
     protected function populate($type, $response)
     {
-        if ($response['status']!='OK') {
+        $body = json_decode($response->getBody(), true);
+        if ($response->getStatusCode() != 200 || $body['status'] !== 'OK') {
             throw new \Exception('No results found.');
         }
 
         return $this
             ->hydrator
             ->hydrate(
-                $response['results'],
+                $body['results'],
                 $type
             )
         ;
@@ -95,12 +96,10 @@ class Locator extends BaseLocator
                     sprintf(
                         '%s?address=%s&key=%s',
                         $this->api_endpoint,
-                        $address->getFullAddress(),
+                        urlencode($address->getFullAddress()),
                         $this->api_key
                     )
                 )
-                ->send()
-                ->json()
         );
 
         $this
@@ -130,15 +129,13 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%s?latlng=%s,%s&key=%s',
+                        '%s?latlng=%F,%F&key=%s',
                         $this->api_endpoint,
                         $coordinates->getLatitude(),
                         $coordinates->getLongitude(),
                         $this->api_key
                     )
                 )
-                ->send()
-                ->json()
         );
 
         $this

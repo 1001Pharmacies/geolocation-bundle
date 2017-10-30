@@ -12,7 +12,7 @@
 namespace Meup\Bundle\GeoLocationBundle\Provider\Yandex;
 
 use Psr\Log\LoggerInterface;
-use Guzzle\Http\Client as HttpClient;
+use GuzzleHttp\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
@@ -69,6 +69,7 @@ class Locator extends BaseLocator
      */
     protected function populate($type, $response)
     {
+        $response = json_decode($response->getBody(), true);
         if ($response['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['found']=='0') {
             throw new \Exception('No results found.');
         }
@@ -98,8 +99,6 @@ class Locator extends BaseLocator
                         $address->getFullAddress()
                     )
                 )
-                ->send()
-                ->json()
         );
 
         $this
@@ -129,14 +128,12 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%s/?geocode=%s,%s&lang=en-US&format=json&results=1',
+                        '%s/?geocode=%F,%F&lang=en-US&format=json&results=1',
                         $this->api_endpoint,
                         $coordinates->getLatitude(),
                         $coordinates->getLongitude()
                     )
                 )
-                ->send()
-                ->json()
         );
 
         $this

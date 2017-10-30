@@ -12,7 +12,7 @@
 namespace Meup\Bundle\GeoLocationBundle\Provider\Bing;
 
 use Psr\Log\LoggerInterface;
-use Guzzle\Http\Client as HttpClient;
+use GuzzleHttp\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
@@ -36,12 +36,12 @@ class Locator extends BaseLocator
     protected $client;
 
     /**
-     * @var string 
+     * @var string
      */
     protected $api_key;
 
     /**
-     * @var string 
+     * @var string
      */
     protected $api_endpoint;
 
@@ -67,21 +67,21 @@ class Locator extends BaseLocator
      */
     public function getCoordinates(AddressInterface $address)
     {
+        $response = $this
+            ->client
+            ->get(
+                sprintf(
+                    '%s%s?o=json&key=%s',
+                    $this->api_endpoint,
+                    $address->getFullAddress(),
+                    $this->api_key
+                )
+            );
+
         $coordinates = $this
             ->hydrator
             ->hydrate(
-                $this
-                    ->client
-                    ->get(
-                        sprintf(
-                            '%s%s?o=json&key=%s',
-                            $this->api_endpoint,
-                            $address->getFullAddress(),
-                            $this->api_key
-                        )
-                    )
-                    ->send()
-                    ->json(),
+                json_decode($response->getBody(), true),
                 Hydrator::TYPE_COORDINATES
             )
         ;
@@ -109,22 +109,21 @@ class Locator extends BaseLocator
      */
     public function getAddress(CoordinatesInterface $coordinates)
     {
+        $response = $this
+            ->client
+            ->get(
+                sprintf(
+                    '%s%F,%F?o=json&key=%s',
+                    $this->api_endpoint,
+                    $coordinates->getLatitude(),
+                    $coordinates->getLongitude(),
+                    $this->api_key
+                )
+            );
         $address = $this
             ->hydrator
             ->hydrate(
-                $this
-                    ->client
-                    ->get(
-                        sprintf(
-                            '%s%s,%s?o=json&key=%s',
-                            $this->api_endpoint,
-                            $coordinates->getLatitude(),
-                            $coordinates->getLongitude(),
-                            $this->api_key
-                        )
-                    )
-                    ->send()
-                    ->json(),
+                json_decode($response->getBody(), true),
                 Hydrator::TYPE_ADDRESS
             )
         ;

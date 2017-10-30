@@ -15,14 +15,14 @@
         }
     ],
     "require": {
-        "php":         ">=5.3.3",
+        "php":         ">=5.5",
         "ext-curl":    "*",
-        "guzzle/http": "~3.9"
+        "guzzlehttp/guzzle":    "6.*"
     },
     "require-dev": {
         "symfony/symfony":           "2.3.*",
         "phpunit/phpunit":           "4.*",
-        "squizlabs/php_codesniffer": "1.*",
+        "squizlabs/php_codesniffer": "2.*",
         "sebastian/phpcpd":          "2.*",
         "phing/phing":               "~2.9",
         "sami/sami":                 "2.0.*"

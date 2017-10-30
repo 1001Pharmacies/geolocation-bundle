@@ -12,7 +12,7 @@
 namespace Meup\Bundle\GeoLocationBundle\Provider\Heredotcom;
 
 use Psr\Log\LoggerInterface;
-use Guzzle\Http\Client as HttpClient;
+use GuzzleHttp\Client as HttpClient;
 use Meup\Bundle\GeoLocationBundle\Handler\Locator as BaseLocator;
 use Meup\Bundle\GeoLocationBundle\Hydrator\HydratorInterface;
 use Meup\Bundle\GeoLocationBundle\Model\AddressInterface;
@@ -91,6 +91,7 @@ class Locator extends BaseLocator
      */
     protected function populate($type, $response)
     {
+        $response = json_decode($response->getBody(), true);
         if (count($response['Response']['View']) == 0 || array_key_exists('Result', $response['Response']['View'][0]) === false) {
             throw new \Exception('No results found.');
         }
@@ -127,8 +128,6 @@ class Locator extends BaseLocator
                         $this->app_code
                     )
                 )
-                ->send()
-                ->json()
         );
 
         $this
@@ -158,7 +157,7 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%s?prox=%s,%s&mode=retrieveAddresses&app_id=%s&app_code=%s&gen=8&maxresults=1',
+                        '%s?prox=%F,%F&mode=retrieveAddresses&app_id=%s&app_code=%s&gen=8&maxresults=1',
                         $this->api_reverse_endpoint,
                         $coordinates->getLatitude(),
                         $coordinates->getLongitude(),
@@ -166,8 +165,6 @@ class Locator extends BaseLocator
                         $this->app_code
                     )
                 )
-                ->send()
-                ->json()
         );
 
         $this
