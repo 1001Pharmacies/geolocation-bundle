@@ -110,8 +110,8 @@ class LocatorManager implements LocatorManagerInterface
                         'Geocoding : Find coordinates by address',
                         array(
                             'address'   => $location->getFullAddress(),
-                            'latitude'  => $result->getLatitude(),
-                            'longitude' => $result->getLongitude(),
+                            'latitude'  => $result ? $result->getLatitude() : null,
+                            'longitude' => $result ? $result->getLongitude() : null,
                         )
                     )
                 ;
@@ -123,7 +123,7 @@ class LocatorManager implements LocatorManagerInterface
                     ->debug(
                         'Geocoding : Locate address by coordinates',
                         array(
-                            'address'   => $result->getFullAddress(),
+                            'address'   => $result ? $result->getFullAddress() : null,
                             'latitude'  => $location->getLatitude(),
                             'longitude' => $location->getLongitude(),
                         )
