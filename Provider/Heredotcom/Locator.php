@@ -121,7 +121,7 @@ class Locator extends BaseLocator
                 ->client
                 ->get(
                     sprintf(
-                        '%s?searchtext=%s&app_id=%s&app_code=%s&gen=8maxresults=1',
+                        '%s?searchtext=%s&app_id=%s&app_code=%s&gen=8&maxresults=1',
                         $this->api_endpoint,
                         $address->getFullAddress(),
                         $this->app_id,
